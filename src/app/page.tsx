@@ -11,8 +11,10 @@ import {
   ArrowUpRight, ArrowDownRight, BarChart3, Repeat,
   Scale, Info, Lightbulb, Target, AlertTriangle,
   Shield, Activity, FileText, ChevronRight, CheckCircle,
-  AlertCircle, Clock, Zap
+  AlertCircle, Clock, Zap, Sparkles
 } from 'lucide-react';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 
 import {
   ViewMode,
@@ -1003,15 +1005,20 @@ export default function FNFFXComprehensiveDashboard() {
             {/* 채권/채무 카드 섹션 */}
             <div className="grid grid-cols-2 gap-6">
               {/* 채권 카드 */}
-              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-5 border border-blue-200">
+              <Card variant="blue" className="p-5">
                 <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-2">
-                    <TrendingUp className="w-5 h-5 text-blue-600" />
-                    <h3 className="text-lg font-bold text-blue-800">채권 (외화자산)</h3>
-                    <span className="text-xs bg-blue-100 text-blue-600 px-2 py-0.5 rounded-full">
-                      {selectedCurrency === 'ALL' ? '전체' : selectedCurrency}
-                    </span>
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-blue-100 rounded-lg">
+                      <TrendingUp className="w-5 h-5 text-blue-600" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-blue-800">채권 (외화자산)</h3>
+                      <p className="text-xs text-blue-500">Foreign Currency Receivables</p>
+                    </div>
                   </div>
+                  <Badge variant={selectedCurrency === 'ALL' ? 'info' : selectedCurrency.toLowerCase() as 'cny' | 'usd' | 'hkd' | 'eur'}>
+                    {selectedCurrency === 'ALL' ? '전체' : selectedCurrency}
+                  </Badge>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
@@ -1094,28 +1101,14 @@ export default function FNFFXComprehensiveDashboard() {
                         <div className="text-[10px] text-slate-500 mb-1">수금금액</div>
                         <div className="text-lg font-bold text-emerald-700">
                           {selectedCurrency === 'ALL'
-                            ? currentQ.settlement_recv.toLocaleString()
+                            ? `${currentQ.settlement_recv.toLocaleString()}억`
                             : '-'
-                          }억
+                          }
                         </div>
-                        {/* 수금금액 통화별 구분 - 거래손익 데이터 기반 표시 */}
+                        {/* 수금금액 통화별 구분 - 통화별 데이터 없음 */}
                         {selectedCurrency === 'ALL' && (
-                          <div className="mt-2 space-y-1">
-                            {['CNY', 'HKD', 'USD', 'EUR'].map(ccy => {
-                              const tradePL = (currencyTradePL[currencyTradePL.length - 1] as unknown as Record<string, number>)?.[ccy] || 0;
-                              if (tradePL === 0) return null;
-                              return (
-                                <div key={ccy} className="flex items-center justify-between text-[10px]">
-                                  <div className="flex items-center gap-1">
-                                    <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: currencyColors[ccy] }}></div>
-                                    <span className="text-slate-500">{ccy}</span>
-                                  </div>
-                                  <span className={tradePL >= 0 ? 'text-emerald-600' : 'text-red-500'}>
-                                    {tradePL >= 0 ? '+' : ''}{tradePL.toFixed(1)}
-                                  </span>
-                                </div>
-                              );
-                            })}
+                          <div className="mt-2 text-[10px] text-slate-400 italic">
+                            통화별 데이터 미집계
                           </div>
                         )}
                       </div>
@@ -1159,22 +1152,38 @@ export default function FNFFXComprehensiveDashboard() {
                 {/* 채권 총손익 */}
                 <div className="mt-4 bg-blue-100 rounded-xl p-3 flex items-center justify-between">
                   <span className="text-sm font-semibold text-blue-700">채권 총손익</span>
-                  <span className={`text-xl font-bold ${(currentQ.eval_recv_pl + currentQ.trade_recv_pl) >= 0 ? 'text-blue-700' : 'text-red-600'}`}>
-                    {(currentQ.eval_recv_pl + currentQ.trade_recv_pl) >= 0 ? '+' : ''}{(currentQ.eval_recv_pl + currentQ.trade_recv_pl).toFixed(1)}억
-                  </span>
+                  {(() => {
+                    const recvEvalPL = selectedCurrency === 'ALL'
+                      ? currentQ.eval_recv_pl
+                      : ((currencyRecvEvalPL[currencyRecvEvalPL.length - 1] as unknown as Record<string, number>)?.[selectedCurrency] || 0);
+                    const recvTradePL = selectedCurrency === 'ALL'
+                      ? currentQ.trade_recv_pl
+                      : ((currencyTradePL[currencyTradePL.length - 1] as unknown as Record<string, number>)?.[selectedCurrency] || 0);
+                    const totalPL = recvEvalPL + recvTradePL;
+                    return (
+                      <span className={`text-xl font-bold ${totalPL >= 0 ? 'text-blue-700' : 'text-red-600'}`}>
+                        {totalPL >= 0 ? '+' : ''}{totalPL.toFixed(1)}억
+                      </span>
+                    );
+                  })()}
                 </div>
-              </div>
+              </Card>
 
               {/* 채무 카드 */}
-              <div className="bg-gradient-to-br from-red-50 to-rose-50 rounded-2xl p-5 border border-red-200">
+              <Card variant="red" className="p-5">
                 <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-2">
-                    <TrendingDown className="w-5 h-5 text-red-600" />
-                    <h3 className="text-lg font-bold text-red-800">채무 (외화부채)</h3>
-                    <span className="text-xs bg-red-100 text-red-600 px-2 py-0.5 rounded-full">
-                      {selectedCurrency === 'ALL' ? '전체' : selectedCurrency}
-                    </span>
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-red-100 rounded-lg">
+                      <TrendingDown className="w-5 h-5 text-red-600" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-red-800">채무 (외화부채)</h3>
+                      <p className="text-xs text-red-500">Foreign Currency Payables</p>
+                    </div>
                   </div>
+                  <Badge variant={selectedCurrency === 'ALL' ? 'destructive' : selectedCurrency.toLowerCase() as 'cny' | 'usd' | 'hkd' | 'eur'}>
+                    {selectedCurrency === 'ALL' ? '전체' : selectedCurrency}
+                  </Badge>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
@@ -1257,28 +1266,14 @@ export default function FNFFXComprehensiveDashboard() {
                         <div className="text-[10px] text-slate-500 mb-1">결제금액</div>
                         <div className="text-lg font-bold text-orange-700">
                           {selectedCurrency === 'ALL'
-                            ? Math.abs(currentQ.settlement_payable).toLocaleString()
+                            ? `${Math.abs(currentQ.settlement_payable).toLocaleString()}억`
                             : '-'
-                          }억
+                          }
                         </div>
-                        {/* 결제금액 통화별 구분 - 채무 거래손익 기반 표시 */}
+                        {/* 결제금액 통화별 구분 - 통화별 데이터 없음 */}
                         {selectedCurrency === 'ALL' && (
-                          <div className="mt-2 space-y-1">
-                            {['USD', 'EUR'].map(ccy => {
-                              // 채무 거래손익은 대부분 USD (채무의 99%가 USD)
-                              const tradePL = ccy === 'USD' ? currentQ.trade_payable_pl : 0;
-                              return (
-                                <div key={ccy} className="flex items-center justify-between text-[10px]">
-                                  <div className="flex items-center gap-1">
-                                    <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: currencyColors[ccy] }}></div>
-                                    <span className="text-slate-500">{ccy}</span>
-                                  </div>
-                                  <span className={tradePL >= 0 ? 'text-emerald-600' : 'text-red-500'}>
-                                    {tradePL >= 0 ? '+' : ''}{tradePL.toFixed(1)}
-                                  </span>
-                                </div>
-                              );
-                            })}
+                          <div className="mt-2 text-[10px] text-slate-400 italic">
+                            통화별 데이터 미집계
                           </div>
                         )}
                       </div>
@@ -1287,28 +1282,24 @@ export default function FNFFXComprehensiveDashboard() {
                         <div className={`text-xl font-bold ${currentQ.trade_payable_pl >= 0 ? 'text-emerald-600' : 'text-red-500'}`}>
                           {selectedCurrency === 'ALL' ? (
                             <>{currentQ.trade_payable_pl >= 0 ? '+' : ''}{currentQ.trade_payable_pl.toFixed(1)}억</>
+                          ) : selectedCurrency === 'USD' ? (
+                            <>{currentQ.trade_payable_pl >= 0 ? '+' : ''}{currentQ.trade_payable_pl.toFixed(1)}억</>
                           ) : (
                             <>0.0억</>
                           )}
                         </div>
-                        {/* 거래손익 통화별 구분 (ALL일 때만) - 채무 거래손익 */}
+                        {/* 거래손익 통화별 구분 (ALL일 때만) - 채무 거래손익 (99%가 USD) */}
                         {selectedCurrency === 'ALL' && (
                           <div className="mt-2 space-y-1">
-                            {['USD', 'EUR'].map(ccy => {
-                              // 채무 거래손익은 대부분 USD (채무의 99%가 USD)
-                              const tradePL = ccy === 'USD' ? currentQ.trade_payable_pl : 0;
-                              return (
-                                <div key={ccy} className="flex items-center justify-between text-[10px]">
-                                  <div className="flex items-center gap-1">
-                                    <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: currencyColors[ccy] }}></div>
-                                    <span className="text-slate-500">{ccy}</span>
-                                  </div>
-                                  <span className={tradePL >= 0 ? 'text-emerald-600' : 'text-red-500'}>
-                                    {tradePL >= 0 ? '+' : ''}{tradePL.toFixed(1)}
-                                  </span>
-                                </div>
-                              );
-                            })}
+                            <div className="flex items-center justify-between text-[10px]">
+                              <div className="flex items-center gap-1">
+                                <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: currencyColors['USD'] }}></div>
+                                <span className="text-slate-500">USD</span>
+                              </div>
+                              <span className={currentQ.trade_payable_pl >= 0 ? 'text-emerald-600' : 'text-red-500'}>
+                                {currentQ.trade_payable_pl >= 0 ? '+' : ''}{currentQ.trade_payable_pl.toFixed(1)}
+                              </span>
+                            </div>
                           </div>
                         )}
                       </div>
@@ -1319,22 +1310,39 @@ export default function FNFFXComprehensiveDashboard() {
                 {/* 채무 총손익 */}
                 <div className="mt-4 bg-red-100 rounded-xl p-3 flex items-center justify-between">
                   <span className="text-sm font-semibold text-red-700">채무 총손익</span>
-                  <span className={`text-xl font-bold ${(currentQ.eval_payable_pl + currentQ.trade_payable_pl) >= 0 ? 'text-emerald-600' : 'text-red-700'}`}>
-                    {(currentQ.eval_payable_pl + currentQ.trade_payable_pl) >= 0 ? '+' : ''}{(currentQ.eval_payable_pl + currentQ.trade_payable_pl).toFixed(1)}억
-                  </span>
+                  {(() => {
+                    const payEvalPL = selectedCurrency === 'ALL'
+                      ? currentQ.eval_payable_pl
+                      : ((currencyPayableEvalPL[currencyPayableEvalPL.length - 1] as unknown as Record<string, number>)?.[selectedCurrency] || 0);
+                    // 채무 거래손익은 거의 전부 USD
+                    const payTradePL = selectedCurrency === 'ALL' || selectedCurrency === 'USD'
+                      ? currentQ.trade_payable_pl
+                      : 0;
+                    const totalPL = payEvalPL + payTradePL;
+                    return (
+                      <span className={`text-xl font-bold ${totalPL >= 0 ? 'text-emerald-600' : 'text-red-700'}`}>
+                        {totalPL >= 0 ? '+' : ''}{totalPL.toFixed(1)}억
+                      </span>
+                    );
+                  })()}
                 </div>
-              </div>
+              </Card>
             </div>
 
             {/* 3단 그래프 구성 */}
             <div className="grid grid-cols-3 gap-4">
               {/* 1. 전체 외환손익 (순액) */}
-              <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+              <Card variant="elevated" className="p-5">
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-sm font-semibold text-slate-700">
-                    {selectedCurrency === 'ALL' ? '전체' : selectedCurrency} 외환손익
-                  </h3>
-                  <span className="text-xs text-slate-400">{viewMode === 'quarterly' ? '분기' : '누적'}</span>
+                  <div className="flex items-center gap-2">
+                    <div className="p-1.5 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-lg">
+                      <BarChart3 className="w-4 h-4 text-blue-600" />
+                    </div>
+                    <h3 className="text-sm font-semibold text-slate-700">
+                      {selectedCurrency === 'ALL' ? '전체' : selectedCurrency} 외환손익
+                    </h3>
+                  </div>
+                  <Badge variant="secondary">{viewMode === 'quarterly' ? '분기' : '누적'}</Badge>
                 </div>
                 <ResponsiveContainer width="100%" height={260}>
                   <ComposedChart data={recvPayableChartData}>
@@ -1356,12 +1364,17 @@ export default function FNFFXComprehensiveDashboard() {
                     />
                   </ComposedChart>
                 </ResponsiveContainer>
-              </div>
+              </Card>
 
               {/* 2. 거래손익 + 기말환율 */}
-              <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+              <Card variant="elevated" className="p-5">
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-sm font-semibold text-emerald-600">거래손익</h3>
+                  <div className="flex items-center gap-2">
+                    <div className="p-1.5 bg-gradient-to-br from-emerald-100 to-teal-100 rounded-lg">
+                      <Repeat className="w-4 h-4 text-emerald-600" />
+                    </div>
+                    <h3 className="text-sm font-semibold text-emerald-600">거래손익</h3>
+                  </div>
                   {selectedCurrency !== 'ALL' && (
                     <div className="flex gap-1">
                       <button
@@ -1420,12 +1433,17 @@ export default function FNFFXComprehensiveDashboard() {
                     </ComposedChart>
                   </ResponsiveContainer>
                 )}
-              </div>
+              </Card>
 
               {/* 3. 평가손익 + 기말환율 */}
-              <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+              <Card variant="elevated" className="p-5">
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-sm font-semibold text-purple-600">평가손익</h3>
+                  <div className="flex items-center gap-2">
+                    <div className="p-1.5 bg-gradient-to-br from-purple-100 to-violet-100 rounded-lg">
+                      <Scale className="w-4 h-4 text-purple-600" />
+                    </div>
+                    <h3 className="text-sm font-semibold text-purple-600">평가손익</h3>
+                  </div>
                   {selectedCurrency !== 'ALL' && (
                     <div className="flex gap-1">
                       <button
@@ -1484,14 +1502,22 @@ export default function FNFFXComprehensiveDashboard() {
                     </ComposedChart>
                   </ResponsiveContainer>
                 )}
-              </div>
+              </Card>
             </div>
 
             {/* 주요통화 USD/CNY 분기별 분석 테이블 */}
-            <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
-              <div className="flex items-center gap-2 mb-4">
-                <FileText className="w-5 h-5 text-slate-600" />
-                <h3 className="text-sm font-semibold text-slate-700">주요통화 (USD/CNY) 분기별 분석</h3>
+            <Card variant="gradient" className="p-6">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-2">
+                  <div className="p-2 bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg">
+                    <FileText className="w-5 h-5 text-slate-600" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-semibold text-slate-700">주요통화 (USD/CNY) 분기별 분석</h3>
+                    <p className="text-xs text-slate-400">Currency Analysis by Quarter</p>
+                  </div>
+                </div>
+                <Badge variant="secondary">{viewMode === 'quarterly' ? '분기' : '누적'}</Badge>
               </div>
               <div className="overflow-x-auto">
                 <table className="w-full text-xs">
@@ -1648,7 +1674,7 @@ export default function FNFFXComprehensiveDashboard() {
                   </tbody>
                 </table>
               </div>
-            </div>
+            </Card>
           </div>
         )}
       </div>
