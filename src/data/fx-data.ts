@@ -26,7 +26,8 @@ export const exchangeRateData = [
   { quarter: "24.4Q", USD: 1470.0, CNY: 201.27, HKD: 189.30, EUR: 1528.73, JPY: 9.36, TWD: 45.13 },
   { quarter: "25.1Q", USD: 1466.5, CNY: 201.68, HKD: 188.53, EUR: 1587.85, JPY: 9.82, TWD: 45.50 },
   { quarter: "25.2Q", USD: 1356.4, CNY: 189.16, HKD: 172.80, EUR: 1591.80, JPY: 9.39, TWD: 44.50 },
-  { quarter: "25.3Q", USD: 1402.2, CNY: 196.82, HKD: 180.15, EUR: 1644.50, JPY: 9.44, TWD: 46.10 }
+  { quarter: "25.3Q", USD: 1402.2, CNY: 196.82, HKD: 180.15, EUR: 1644.50, JPY: 9.44, TWD: 46.10 },
+  { quarter: "25.4Q", USD: 1434.9, CNY: 204.76, HKD: 184.41, EUR: 1685.72, JPY: 9.18, TWD: 45.91 }
 ];
 
 // ========================================
@@ -39,9 +40,10 @@ export const quarterlyData = [
   { quarter: "24.2Q", year: 2024, recv_balance: 479.3, payable_balance: -401.3, eval_recv_pl: 10.3, eval_payable_pl: -0.3, eval_net_pl: 10.1, trade_recv_pl: -7.4, trade_payable_pl: 12.5, trade_net_pl: 5.1, settlement_recv: 778, settlement_payable: -349, total_net_pl: 15.2 },
   { quarter: "24.3Q", year: 2024, recv_balance: 1018.2, payable_balance: -674.3, eval_recv_pl: -21.4, eval_payable_pl: 11.1, eval_net_pl: -10.4, trade_recv_pl: -24.1, trade_payable_pl: 24.9, trade_net_pl: 0.8, settlement_recv: 2395, settlement_payable: -959, total_net_pl: -9.6 },
   { quarter: "24.4Q", year: 2024, recv_balance: 491.6, payable_balance: -637.1, eval_recv_pl: 45.5, eval_payable_pl: -25.4, eval_net_pl: 20.1, trade_recv_pl: 48.5, trade_payable_pl: -37.0, trade_net_pl: 11.5, settlement_recv: 1284, settlement_payable: -706, total_net_pl: 31.6 },
-  { quarter: "25.1Q", year: 2025, recv_balance: 735.8, payable_balance: -454.7, eval_recv_pl: 4.4, eval_payable_pl: -4.4, eval_net_pl: -0.1, trade_recv_pl: -17.8, trade_payable_pl: -12.7, trade_net_pl: -30.4, settlement_recv: 2296, settlement_payable: -1079, total_net_pl: -30.5 },
-  { quarter: "25.2Q", year: 2025, recv_balance: 732.5, payable_balance: -479.8, eval_recv_pl: -38.9, eval_payable_pl: 9.2, eval_net_pl: -29.6, trade_recv_pl: 1.7, trade_payable_pl: 26.8, trade_net_pl: 28.5, settlement_recv: 1118, settlement_payable: -586, total_net_pl: -1.1 },
-  { quarter: "25.3Q", year: 2025, recv_balance: 1684.8, payable_balance: -854.0, eval_recv_pl: 30.5, eval_payable_pl: -10.5, eval_net_pl: 20.0, trade_recv_pl: 58.1, trade_payable_pl: -23.7, trade_net_pl: 34.3, settlement_recv: 3012, settlement_payable: -1266, total_net_pl: 54.3 }
+  { quarter: "25.1Q", year: 2025, recv_balance: 735.8, payable_balance: -454.7, eval_recv_pl: 2.68, eval_payable_pl: -4.43, eval_net_pl: -1.75, trade_recv_pl: -17.8, trade_payable_pl: -12.7, trade_net_pl: -30.4, settlement_recv: 2296, settlement_payable: -1079, total_net_pl: -32.15 },
+  { quarter: "25.2Q", year: 2025, recv_balance: 732.5, payable_balance: -479.8, eval_recv_pl: -34.95, eval_payable_pl: 9.18, eval_net_pl: -25.77, trade_recv_pl: 1.7, trade_payable_pl: 26.8, trade_net_pl: 28.5, settlement_recv: 1118, settlement_payable: -586, total_net_pl: 2.73 },
+  { quarter: "25.3Q", year: 2025, recv_balance: 1684.8, payable_balance: -854.0, eval_recv_pl: 28.13, eval_payable_pl: -10.47, eval_net_pl: 17.66, trade_recv_pl: 58.1, trade_payable_pl: -23.7, trade_net_pl: 34.3, settlement_recv: 3012, settlement_payable: -1266, total_net_pl: 51.96 },
+  { quarter: "25.4Q", year: 2025, recv_balance: 1220.4, payable_balance: -848.3, eval_recv_pl: -13.57, eval_payable_pl: 20.32, eval_net_pl: 6.75, trade_recv_pl: 67.0, trade_payable_pl: -27.8, trade_net_pl: 39.2, settlement_recv: 1997, settlement_payable: -939, total_net_pl: 45.95 }
 ];
 
 // ========================================
@@ -54,9 +56,10 @@ export const cumulativeData = [
   { quarter: "24.2Q", year: 2024, recv_balance: 479.3, payable_balance: -401.3, eval_recv_pl: 24.7, eval_payable_pl: -3.9, eval_net_pl: 20.9, trade_recv_pl: 17.3, trade_payable_pl: -8.6, trade_net_pl: 8.7, settlement_recv: 2867, settlement_payable: -1318, total_net_pl: 29.6 },
   { quarter: "24.3Q", year: 2024, recv_balance: 1018.2, payable_balance: -674.3, eval_recv_pl: 3.3, eval_payable_pl: 7.2, eval_net_pl: 10.5, trade_recv_pl: -6.8, trade_payable_pl: 16.3, trade_net_pl: 9.5, settlement_recv: 5262, settlement_payable: -2277, total_net_pl: 20.0 },
   { quarter: "24.4Q", year: 2024, recv_balance: 491.6, payable_balance: -637.1, eval_recv_pl: 48.8, eval_payable_pl: -18.2, eval_net_pl: 30.6, trade_recv_pl: 41.7, trade_payable_pl: -20.7, trade_net_pl: 21.0, settlement_recv: 6546, settlement_payable: -2983, total_net_pl: 51.6 },
-  { quarter: "25.1Q", year: 2025, recv_balance: 735.8, payable_balance: -454.7, eval_recv_pl: 4.4, eval_payable_pl: -4.4, eval_net_pl: -0.1, trade_recv_pl: -17.8, trade_payable_pl: -12.7, trade_net_pl: -30.4, settlement_recv: 2296, settlement_payable: -1079, total_net_pl: -30.5 },
-  { quarter: "25.2Q", year: 2025, recv_balance: 732.5, payable_balance: -479.8, eval_recv_pl: -34.5, eval_payable_pl: 4.8, eval_net_pl: -29.7, trade_recv_pl: -16.1, trade_payable_pl: 14.1, trade_net_pl: -1.9, settlement_recv: 3414, settlement_payable: -1665, total_net_pl: -31.6 },
-  { quarter: "25.3Q", year: 2025, recv_balance: 1684.8, payable_balance: -854.0, eval_recv_pl: -4.0, eval_payable_pl: -5.7, eval_net_pl: -9.7, trade_recv_pl: 42.0, trade_payable_pl: -9.6, trade_net_pl: 32.4, settlement_recv: 6426, settlement_payable: -2931, total_net_pl: 22.7 }
+  { quarter: "25.1Q", year: 2025, recv_balance: 735.8, payable_balance: -454.7, eval_recv_pl: 2.68, eval_payable_pl: -4.43, eval_net_pl: -1.75, trade_recv_pl: -17.8, trade_payable_pl: -12.7, trade_net_pl: -30.4, settlement_recv: 2296, settlement_payable: -1079, total_net_pl: -32.15 },
+  { quarter: "25.2Q", year: 2025, recv_balance: 732.5, payable_balance: -479.8, eval_recv_pl: -32.27, eval_payable_pl: 4.75, eval_net_pl: -27.52, trade_recv_pl: -16.1, trade_payable_pl: 14.1, trade_net_pl: -1.9, settlement_recv: 3414, settlement_payable: -1665, total_net_pl: -29.42 },
+  { quarter: "25.3Q", year: 2025, recv_balance: 1684.8, payable_balance: -854.0, eval_recv_pl: -4.14, eval_payable_pl: -5.72, eval_net_pl: -9.86, trade_recv_pl: 42.0, trade_payable_pl: -9.6, trade_net_pl: 32.4, settlement_recv: 6426, settlement_payable: -2931, total_net_pl: 22.54 },
+  { quarter: "25.4Q", year: 2025, recv_balance: 1220.4, payable_balance: -848.3, eval_recv_pl: -17.71, eval_payable_pl: 14.60, eval_net_pl: -3.11, trade_recv_pl: 109.0, trade_payable_pl: -37.4, trade_net_pl: 71.6, settlement_recv: 8423, settlement_payable: -3870, total_net_pl: 68.49 }
 ];
 
 // ========================================
@@ -68,9 +71,10 @@ export const currencyRecvEvalPL_Quarterly = [
   { quarter: "24.2Q", CNY: 0.21, HKD: 9.67, USD: -0.06, TWD: 0.51, EUR: 0.04 },
   { quarter: "24.3Q", CNY: 0.81, HKD: -19.49, USD: -1.61, TWD: -1.05, EUR: -0.11 },
   { quarter: "24.4Q", CNY: -0.08, HKD: 38.59, USD: 3.30, TWD: 3.30, EUR: 0.45 },
-  { quarter: "25.1Q", CNY: 2.37, HKD: -0.88, USD: 1.11, TWD: 1.26, EUR: 0.50 },
-  { quarter: "25.2Q", CNY: -3.62, HKD: -30.37, USD: -2.95, TWD: -1.41, EUR: -0.47 },
-  { quarter: "25.3Q", CNY: 10.38, HKD: 17.61, USD: 1.95, TWD: 0.50, EUR: 0.03 }
+  { quarter: "25.1Q", CNY: 2.38, HKD: -0.88, USD: 1.11, TWD: 0.44, EUR: 0.50 },
+  { quarter: "25.2Q", CNY: -3.64, HKD: -30.37, USD: -2.95, TWD: 2.47, EUR: -0.47 },
+  { quarter: "25.3Q", CNY: 10.39, HKD: 17.60, USD: 1.94, TWD: -1.83, EUR: 0.03 },
+  { quarter: "25.4Q", CNY: -21.32, HKD: 9.31, USD: -0.84, TWD: -0.75, EUR: 0.02 }
 ];
 
 // ========================================
@@ -82,9 +86,10 @@ export const currencyRecvEvalPL_Cumulative = [
   { quarter: "24.2Q", CNY: 0.42, HKD: 21.90, USD: 0.83, TWD: 1.51, EUR: 0.06 },
   { quarter: "24.3Q", CNY: 1.23, HKD: 2.41, USD: -0.78, TWD: 0.46, EUR: -0.05 },
   { quarter: "24.4Q", CNY: 1.15, HKD: 41.00, USD: 2.52, TWD: 3.76, EUR: 0.40 },
-  { quarter: "25.1Q", CNY: 2.37, HKD: -0.88, USD: 1.11, TWD: 1.26, EUR: 0.50 },
-  { quarter: "25.2Q", CNY: -1.25, HKD: -31.25, USD: -1.84, TWD: -0.15, EUR: 0.03 },
-  { quarter: "25.3Q", CNY: 9.13, HKD: -13.64, USD: 0.11, TWD: 0.35, EUR: 0.06 }
+  { quarter: "25.1Q", CNY: 2.38, HKD: -0.88, USD: 1.11, TWD: 0.44, EUR: 0.50 },
+  { quarter: "25.2Q", CNY: -1.26, HKD: -31.25, USD: -1.84, TWD: 2.91, EUR: 0.03 },
+  { quarter: "25.3Q", CNY: 9.13, HKD: -13.65, USD: 0.10, TWD: 1.08, EUR: 0.06 },
+  { quarter: "25.4Q", CNY: -12.19, HKD: -4.34, USD: -0.74, TWD: 0.33, EUR: 0.08 }
 ];
 
 // ========================================
@@ -96,9 +101,10 @@ export const currencyPayableEvalPL_Quarterly = [
   { quarter: "24.2Q", USD: -0.29, EUR: 0.18, CNY: 0.01, JPY: 0 },
   { quarter: "24.3Q", USD: 11.08, EUR: 0.05, CNY: -0.01, JPY: 0 },
   { quarter: "24.4Q", USD: -25.42, EUR: -0.24, CNY: -0.01, JPY: 0 },
-  { quarter: "25.1Q", USD: -4.38, EUR: -0.50, CNY: 0.00, JPY: 0 },
-  { quarter: "25.2Q", USD: 9.13, EUR: 0.52, CNY: 0.00, JPY: 0 },
-  { quarter: "25.3Q", USD: -10.46, EUR: -0.08, CNY: 0.00, JPY: 0 }
+  { quarter: "25.1Q", USD: -4.38, EUR: -0.05, CNY: 0.00, JPY: 0 },
+  { quarter: "25.2Q", USD: 9.13, EUR: 0.05, CNY: 0.00, JPY: 0 },
+  { quarter: "25.3Q", USD: -10.46, EUR: 0.00, CNY: 0.00, JPY: 0 },
+  { quarter: "25.4Q", USD: 20.30, EUR: 0.02, CNY: 0.00, JPY: 0 }
 ];
 
 // ========================================
@@ -110,9 +116,10 @@ export const currencyPayableEvalPL_Cumulative = [
   { quarter: "24.2Q", USD: -3.86, EUR: 0.01, CNY: 0.01, JPY: 0 },
   { quarter: "24.3Q", USD: 7.22, EUR: 0.06, CNY: 0.00, JPY: 0 },
   { quarter: "24.4Q", USD: -18.20, EUR: -0.18, CNY: -0.01, JPY: 0 },
-  { quarter: "25.1Q", USD: -4.38, EUR: -0.50, CNY: 0.00, JPY: 0 },
-  { quarter: "25.2Q", USD: 4.75, EUR: 0.02, CNY: 0.00, JPY: 0 },
-  { quarter: "25.3Q", USD: -5.71, EUR: -0.06, CNY: 0.00, JPY: 0 }
+  { quarter: "25.1Q", USD: -4.38, EUR: -0.05, CNY: 0.00, JPY: 0 },
+  { quarter: "25.2Q", USD: 4.75, EUR: 0.00, CNY: 0.00, JPY: 0 },
+  { quarter: "25.3Q", USD: -5.71, EUR: 0.00, CNY: 0.00, JPY: 0 },
+  { quarter: "25.4Q", USD: 14.59, EUR: 0.02, CNY: 0.00, JPY: 0 }
 ];
 
 // ========================================
@@ -125,7 +132,8 @@ export const currencyTradePL_Quarterly = [
   { quarter: "24.4Q", CNY: 50.3, HKD: 0.8, USD: -3.6, TWD: 0, EUR: 0 },
   { quarter: "25.1Q", CNY: -28.3, HKD: 3.3, USD: 6.8, TWD: -0.8, EUR: 0 },
   { quarter: "25.2Q", CNY: 14.5, HKD: -3.3, USD: -11.3, TWD: 0.6, EUR: 0.9 },
-  { quarter: "25.3Q", CNY: 55.9, HKD: 1.9, USD: 11.4, TWD: -0.6, EUR: 0.3 }
+  { quarter: "25.3Q", CNY: 55.9, HKD: 1.9, USD: 11.4, TWD: -0.6, EUR: 0.3 },
+  { quarter: "25.4Q", CNY: 57.5, HKD: 1.9, USD: -20.3, TWD: 0, EUR: 0.1 }
 ];
 
 // ========================================
@@ -138,7 +146,8 @@ export const currencyTradePL_Cumulative = [
   { quarter: "24.4Q", CNY: 38.5, HKD: 2.5, USD: -0.3, TWD: 0, EUR: 0 },
   { quarter: "25.1Q", CNY: -28.3, HKD: 3.3, USD: 6.8, TWD: -0.8, EUR: 0 },
   { quarter: "25.2Q", CNY: -13.8, HKD: 0, USD: -4.5, TWD: -0.2, EUR: 0.9 },
-  { quarter: "25.3Q", CNY: 42.1, HKD: -1.4, USD: 0.1, TWD: 0, EUR: 1.2 }
+  { quarter: "25.3Q", CNY: 42.1, HKD: -1.4, USD: 0.1, TWD: 0, EUR: 1.2 },
+  { quarter: "25.4Q", CNY: 99.6, HKD: 0.5, USD: -20.2, TWD: 0, EUR: 1.3 }
 ];
 
 // ========================================
@@ -152,7 +161,8 @@ export const currencyBalanceData = [
   { quarter: "24.4Q", recv_CNY: 12.7, recv_HKD: 360.4, recv_USD: 41.9, recv_TWD: 64.4, recv_EUR: 12.2, pay_USD: -635.8, pay_EUR: -1.2 },
   { quarter: "25.1Q", recv_CNY: 204.5, recv_HKD: 348.2, recv_USD: 106.3, recv_TWD: 63.0, recv_EUR: 13.8, pay_USD: -452.9, pay_EUR: -1.7 },
   { quarter: "25.2Q", recv_CNY: 19.6, recv_HKD: 343.5, recv_USD: 43.8, recv_TWD: 46.4, recv_EUR: 0.8, pay_USD: -478.6, pay_EUR: -1.1 },
-  { quarter: "25.3Q", recv_CNY: 1154.2, recv_HKD: 375.0, recv_USD: 80.5, recv_TWD: 74.2, recv_EUR: 0.8, pay_USD: -853.1, pay_EUR: -0.8 }
+  { quarter: "25.3Q", recv_CNY: 1154.2, recv_HKD: 375.0, recv_USD: 80.5, recv_TWD: 74.2, recv_EUR: 0.8, pay_USD: -853.1, pay_EUR: -0.8 },
+  { quarter: "25.4Q", recv_CNY: 695.4, recv_HKD: 372.5, recv_USD: 38.7, recv_TWD: 113.0, recv_EUR: 0.8, pay_USD: -847.5, pay_EUR: -0.8 }
 ];
 
 // ========================================
