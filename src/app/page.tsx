@@ -18,6 +18,9 @@ import { Badge } from '@/components/ui/badge';
 
 import {
   ViewMode,
+  BaseQuarter,
+  AVAILABLE_QUARTERS,
+  DEFAULT_QUARTER,
   currencyColors,
   exchangeRateData,
   quarterlyData,
@@ -34,8 +37,10 @@ import {
   riskIndicators,
   managementRecommendations,
   actionPlans,
+  aiInsight,
   calcYoY,
   calcYoYAmount,
+  getCompareQuarter,
 } from '@/data/fx-data';
 
 // ========================================
@@ -253,14 +258,14 @@ interface SensitivityCardProps {
 }
 
 const SensitivityCard: React.FC<SensitivityCardProps> = ({ item }) => {
-  const riskColors = {
+  const riskColors: Record<string, { bg: string; border: string; text: string; badge: string }> = {
     high: { bg: 'bg-red-50', border: 'border-red-200', text: 'text-red-600', badge: 'bg-red-100 text-red-700' },
     medium: { bg: 'bg-amber-50', border: 'border-amber-200', text: 'text-amber-600', badge: 'bg-amber-100 text-amber-700' },
     low: { bg: 'bg-emerald-50', border: 'border-emerald-200', text: 'text-emerald-600', badge: 'bg-emerald-100 text-emerald-700' }
   };
 
-  const colors = riskColors[item.riskLevel];
-  const riskLabels = { high: '고위험', medium: '중위험', low: '저위험' };
+  const colors = riskColors[item.riskLevel] || riskColors.low;
+  const riskLabels: Record<string, string> = { high: '고위험', medium: '중위험', low: '저위험' };
 
   return (
     <div className={`${colors.bg} rounded-xl p-4 border ${colors.border}`}>
@@ -318,9 +323,10 @@ interface AIInsightSectionProps {
   prevRateData: typeof exchangeRateData[0];
   viewMode: ViewMode;
   compareLabel: string;
+  baseQuarter: string;
 }
 
-const AIInsightSection: React.FC<AIInsightSectionProps> = ({ currentData, prevData, rateData, prevRateData, viewMode, compareLabel }) => {
+const AIInsightSection: React.FC<AIInsightSectionProps> = ({ currentData, prevData, rateData, prevRateData, viewMode, compareLabel, baseQuarter }) => {
   const qEvalPL = currentData.eval_net_pl;
   const qTradePL = currentData.trade_net_pl;
   const qTotalPL = currentData.total_net_pl;
@@ -349,7 +355,7 @@ const AIInsightSection: React.FC<AIInsightSectionProps> = ({ currentData, prevDa
           </div>
         </div>
         <div className="text-right">
-          <div className="text-xs text-slate-400">25.3Q {viewMode === 'quarterly' ? '분기' : '누적'} 순외환손익</div>
+          <div className="text-xs text-slate-400">{baseQuarter} {viewMode === 'quarterly' ? '분기' : '누적'} 순외환손익</div>
           <div className={`text-2xl font-bold ${qTotalPL >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
             {qTotalPL >= 0 ? '+' : ''}{qTotalPL.toFixed(1)}억원
           </div>
@@ -583,6 +589,7 @@ const PLTooltip: React.FC<PLTooltipProps> = ({ active, payload, label }) => {
 export default function FNFFXComprehensiveDashboard() {
   const [activeTab, setActiveTab] = useState<'overview' | 'plAnalysis'>('overview');
   const [viewMode, setViewMode] = useState<ViewMode>('cumulative');
+  const [baseQuarter] = useState<BaseQuarter>(DEFAULT_QUARTER);
   const [rateVisibility, setRateVisibility] = useState<Record<string, boolean>>({
     USD: true, CNY: true, HKD: true, EUR: false, JPY: false, TWD: false
   });
@@ -593,6 +600,9 @@ export default function FNFFXComprehensiveDashboard() {
 
   const currencies = ['USD', 'CNY', 'HKD', 'EUR', 'JPY', 'TWD'];
   const plFilterCurrencies: Array<'ALL' | 'USD' | 'CNY' | 'HKD' | 'EUR'> = ['ALL', 'USD', 'CNY', 'HKD', 'EUR'];
+
+  // 기준분기와 비교분기 (YoY)
+  const yoyCompareQuarter = useMemo(() => getCompareQuarter(baseQuarter, viewMode), [baseQuarter, viewMode]);
 
   // viewMode에 따른 데이터 소스 선택 (계산 없이 직접 참조)
   const dataSource = useMemo(() => {
@@ -615,27 +625,27 @@ export default function FNFFXComprehensiveDashboard() {
   const currentQ = dataSource[dataSource.length - 1];
   const prevQ = dataSource[dataSource.length - 2];
 
-  // 비교기준: 누적=전기말(24.4Q), 분기=전년동기(24.3Q)
+  // 비교기준: 누적=전기말, 분기=전년동기 (동적 계산)
   const compareQ = useMemo(() => {
     if (viewMode === 'cumulative') {
-      // 누적: 전기말 (24.4Q)
-      return cumulativeData.find(q => q.quarter === "24.4Q") || cumulativeData[4];
+      // 누적: 전기말
+      return cumulativeData.find(q => q.quarter === yoyCompareQuarter) || cumulativeData[cumulativeData.length - 5];
     } else {
-      // 분기: 전년동기 (24.3Q)
-      return quarterlyData.find(q => q.quarter === "24.3Q") || quarterlyData[3];
+      // 분기: 전년동기
+      return quarterlyData.find(q => q.quarter === yoyCompareQuarter) || quarterlyData[quarterlyData.length - 5];
     }
-  }, [viewMode]);
+  }, [viewMode, yoyCompareQuarter]);
 
-  // 비교기준 레이블
-  const compareLabel = viewMode === 'cumulative' ? "전기말(24.4Q)" : "전년동기(24.3Q)";
+  // 비교기준 레이블 (동적)
+  const compareLabel = viewMode === 'cumulative' ? `전기말(${yoyCompareQuarter})` : `전년동기(${yoyCompareQuarter})`;
 
   // 환율 비교기준: 누적=전기말, 분기=전분기
   const compareRateData = useMemo(() => {
     if (viewMode === 'cumulative') {
-      // 누적: 전기말 환율 (24.4Q)
-      return exchangeRateData.find(r => r.quarter === "24.4Q") || exchangeRateData[4];
+      // 누적: 전기말 환율
+      return exchangeRateData.find(r => r.quarter === yoyCompareQuarter) || exchangeRateData[exchangeRateData.length - 5];
     } else {
-      // 분기: 전분기 환율 (25.2Q)
+      // 분기: 전분기 환율
       return exchangeRateData[exchangeRateData.length - 2];
     }
   }, [viewMode]);
@@ -749,7 +759,7 @@ export default function FNFFXComprehensiveDashboard() {
         {/* 헤더 */}
         <div className="mb-6">
           <h1 className="text-2xl font-bold text-slate-800">FNF 외환 종합 대시보드</h1>
-          <p className="text-slate-500 text-sm mt-1">외화 평가손익(미실현) + 거래손익(실현) 통합 분석 | 25.3Q 기준</p>
+          <p className="text-slate-500 text-sm mt-1">외화 평가손익(미실현) + 거래손익(실현) 통합 분석 | {baseQuarter} 기준</p>
         </div>
 
         {/* 탭 네비게이션 */}
@@ -901,6 +911,7 @@ export default function FNFFXComprehensiveDashboard() {
               prevRateData={compareRateData}
               viewMode={viewMode}
               compareLabel={compareLabel}
+              baseQuarter={baseQuarter}
             />
 
             {/* 차트 섹션 */}
@@ -1528,13 +1539,13 @@ export default function FNFFXComprehensiveDashboard() {
                       <th className="py-2 text-center font-semibold border-b border-slate-200" colSpan={2}>
                         <div className="text-blue-600">기준분기</div>
                         <div className="text-[10px] text-slate-400 font-normal mt-0.5">
-                          {viewMode === 'quarterly' ? '25.3Q' : '25.3Q 누적'}
+                          {viewMode === 'quarterly' ? baseQuarter : `${baseQuarter} 누적`}
                         </div>
                       </th>
                       <th className="py-2 text-center font-semibold border-b border-slate-200" colSpan={2}>
                         <div className="text-purple-600">YoY 비교</div>
                         <div className="text-[10px] text-slate-400 font-normal mt-0.5">
-                          {viewMode === 'quarterly' ? '24.3Q (전년동기)' : '24.4Q (전기말)'}
+                          {viewMode === 'quarterly' ? `${yoyCompareQuarter} (전년동기)` : `${yoyCompareQuarter} (전기말)`}
                         </div>
                       </th>
                       <th className="py-3 text-center text-amber-600 font-semibold" rowSpan={2}>환 익스포저</th>
@@ -1565,16 +1576,13 @@ export default function FNFFXComprehensiveDashboard() {
                         </span>
                       </td>
                       <td className="py-3 text-center text-slate-600">
-                        {viewMode === 'quarterly'
-                          ? (currencyBalanceData.find(d => d.quarter === '24.3Q')?.recv_USD || 0).toFixed(0)
-                          : (currencyBalanceData.find(d => d.quarter === '24.4Q')?.recv_USD || 0).toFixed(0)
-                        }억
+                        {(currencyBalanceData.find(d => d.quarter === yoyCompareQuarter)?.recv_USD || 0).toFixed(0)}억
                       </td>
                       <td className="py-3 text-center">
                         {(() => {
                           const compareRecvEval = viewMode === 'quarterly'
-                            ? (currencyRecvEvalPL_Quarterly.find(d => d.quarter === '24.3Q') as unknown as Record<string, number>)?.USD || 0
-                            : (currencyRecvEvalPL_Cumulative.find(d => d.quarter === '24.4Q') as unknown as Record<string, number>)?.USD || 0;
+                            ? (currencyRecvEvalPL_Quarterly.find(d => d.quarter === yoyCompareQuarter) as unknown as Record<string, number>)?.USD || 0
+                            : (currencyRecvEvalPL_Cumulative.find(d => d.quarter === yoyCompareQuarter) as unknown as Record<string, number>)?.USD || 0;
                           return (
                             <span className={compareRecvEval >= 0 ? 'text-emerald-600' : 'text-red-500'}>
                               {compareRecvEval.toFixed(1)}
@@ -1602,16 +1610,13 @@ export default function FNFFXComprehensiveDashboard() {
                         </span>
                       </td>
                       <td className="py-3 text-center text-slate-600">
-                        {viewMode === 'quarterly'
-                          ? Math.abs((currencyBalanceData.find(d => d.quarter === '24.3Q')?.pay_USD || 0)).toFixed(0)
-                          : Math.abs((currencyBalanceData.find(d => d.quarter === '24.4Q')?.pay_USD || 0)).toFixed(0)
-                        }억
+                        {Math.abs((currencyBalanceData.find(d => d.quarter === yoyCompareQuarter)?.pay_USD || 0)).toFixed(0)}억
                       </td>
                       <td className="py-3 text-center">
                         {(() => {
                           const comparePayEval = viewMode === 'quarterly'
-                            ? (currencyPayableEvalPL_Quarterly.find(d => d.quarter === '24.3Q') as unknown as Record<string, number>)?.USD || 0
-                            : (currencyPayableEvalPL_Cumulative.find(d => d.quarter === '24.4Q') as unknown as Record<string, number>)?.USD || 0;
+                            ? (currencyPayableEvalPL_Quarterly.find(d => d.quarter === yoyCompareQuarter) as unknown as Record<string, number>)?.USD || 0
+                            : (currencyPayableEvalPL_Cumulative.find(d => d.quarter === yoyCompareQuarter) as unknown as Record<string, number>)?.USD || 0;
                           return (
                             <span className={comparePayEval >= 0 ? 'text-emerald-600' : 'text-red-500'}>
                               {comparePayEval.toFixed(1)}
@@ -1636,16 +1641,13 @@ export default function FNFFXComprehensiveDashboard() {
                         </span>
                       </td>
                       <td className="py-3 text-center text-slate-600">
-                        {viewMode === 'quarterly'
-                          ? (currencyBalanceData.find(d => d.quarter === '24.3Q')?.recv_CNY || 0).toFixed(0)
-                          : (currencyBalanceData.find(d => d.quarter === '24.4Q')?.recv_CNY || 0).toFixed(0)
-                        }억
+                        {(currencyBalanceData.find(d => d.quarter === yoyCompareQuarter)?.recv_CNY || 0).toFixed(0)}억
                       </td>
                       <td className="py-3 text-center">
                         {(() => {
                           const compareRecvEval = viewMode === 'quarterly'
-                            ? (currencyRecvEvalPL_Quarterly.find(d => d.quarter === '24.3Q') as unknown as Record<string, number>)?.CNY || 0
-                            : (currencyRecvEvalPL_Cumulative.find(d => d.quarter === '24.4Q') as unknown as Record<string, number>)?.CNY || 0;
+                            ? (currencyRecvEvalPL_Quarterly.find(d => d.quarter === yoyCompareQuarter) as unknown as Record<string, number>)?.CNY || 0
+                            : (currencyRecvEvalPL_Cumulative.find(d => d.quarter === yoyCompareQuarter) as unknown as Record<string, number>)?.CNY || 0;
                           return (
                             <span className={compareRecvEval >= 0 ? 'text-emerald-600' : 'text-red-500'}>
                               {compareRecvEval.toFixed(1)}
