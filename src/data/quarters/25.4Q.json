@@ -1,6 +1,6 @@
 {
   "baseQuarter": "25.4Q",
-  "lastUpdated": "2025-12-31",
+  "lastUpdated": "2026-01-23",
   "exchangeRateData": [
     {
       "quarter": "24.1Q",
@@ -81,120 +81,120 @@
       "year": 2024,
       "recv_balance": 527.5,
       "payable_balance": -373.4,
-      "eval_recv_pl": 14.4,
-      "eval_payable_pl": -3.6,
-      "eval_net_pl": 10.8,
+      "eval_recv_pl": 13.38,
+      "eval_payable_pl": -3.59,
+      "eval_net_pl": 9.79,
       "trade_recv_pl": 24.7,
       "trade_payable_pl": -21.1,
       "trade_net_pl": 3.6,
       "settlement_recv": 2089,
       "settlement_payable": -969,
-      "total_net_pl": 14.4
+      "total_net_pl": 13.4
     },
     {
       "quarter": "24.2Q",
       "year": 2024,
       "recv_balance": 479.3,
       "payable_balance": -401.3,
-      "eval_recv_pl": 10.3,
-      "eval_payable_pl": -0.3,
-      "eval_net_pl": 10.1,
+      "eval_recv_pl": 10.49,
+      "eval_payable_pl": -0.27,
+      "eval_net_pl": 10.22,
       "trade_recv_pl": -7.4,
       "trade_payable_pl": 12.5,
       "trade_net_pl": 5.1,
       "settlement_recv": 778,
       "settlement_payable": -349,
-      "total_net_pl": 15.2
+      "total_net_pl": 15.3
     },
     {
       "quarter": "24.3Q",
       "year": 2024,
       "recv_balance": 1018.2,
       "payable_balance": -674.3,
-      "eval_recv_pl": -21.4,
-      "eval_payable_pl": 11.1,
-      "eval_net_pl": -10.4,
+      "eval_recv_pl": -21.76,
+      "eval_payable_pl": 11.08,
+      "eval_net_pl": -10.68,
       "trade_recv_pl": -24.1,
       "trade_payable_pl": 24.9,
       "trade_net_pl": 0.8,
       "settlement_recv": 2395,
       "settlement_payable": -959,
-      "total_net_pl": -9.6
+      "total_net_pl": -9.9
     },
     {
       "quarter": "24.4Q",
       "year": 2024,
       "recv_balance": 491.6,
       "payable_balance": -637.1,
-      "eval_recv_pl": 45.5,
-      "eval_payable_pl": -25.4,
-      "eval_net_pl": 20.1,
+      "eval_recv_pl": 46.21,
+      "eval_payable_pl": -25.44,
+      "eval_net_pl": 20.77,
       "trade_recv_pl": 48.5,
       "trade_payable_pl": -37.0,
       "trade_net_pl": 11.5,
       "settlement_recv": 1284,
       "settlement_payable": -706,
-      "total_net_pl": 31.6
+      "total_net_pl": 32.3
     },
     {
       "quarter": "25.1Q",
       "year": 2025,
       "recv_balance": 735.8,
       "payable_balance": -454.7,
-      "eval_recv_pl": 2.68,
-      "eval_payable_pl": -4.43,
-      "eval_net_pl": -1.75,
+      "eval_recv_pl": -45.66,
+      "eval_payable_pl": 13.79,
+      "eval_net_pl": -31.87,
       "trade_recv_pl": -17.8,
       "trade_payable_pl": -12.7,
-      "trade_net_pl": -30.4,
+      "trade_net_pl": -30.5,
       "settlement_recv": 2296,
       "settlement_payable": -1079,
-      "total_net_pl": -32.15
+      "total_net_pl": -62.4
     },
     {
       "quarter": "25.2Q",
       "year": 2025,
       "recv_balance": 454.2,
       "payable_balance": -479.8,
-      "eval_recv_pl": -34.95,
+      "eval_recv_pl": -34.94,
       "eval_payable_pl": 9.18,
-      "eval_net_pl": -25.77,
+      "eval_net_pl": -25.76,
       "trade_recv_pl": 1.7,
       "trade_payable_pl": 26.8,
       "trade_net_pl": 28.5,
       "settlement_recv": 1118,
       "settlement_payable": -586,
-      "total_net_pl": 2.73
+      "total_net_pl": 2.7
     },
     {
       "quarter": "25.3Q",
       "year": 2025,
       "recv_balance": 1684.8,
       "payable_balance": -854.0,
-      "eval_recv_pl": 28.13,
+      "eval_recv_pl": 28.14,
       "eval_payable_pl": -10.47,
-      "eval_net_pl": 17.66,
+      "eval_net_pl": 17.67,
       "trade_recv_pl": 58.1,
       "trade_payable_pl": -23.7,
       "trade_net_pl": 34.3,
       "settlement_recv": 3012,
       "settlement_payable": -1266,
-      "total_net_pl": 51.96
+      "total_net_pl": 52.0
     },
     {
       "quarter": "25.4Q",
       "year": 2025,
-      "recv_balance": 1220.4,
+      "recv_balance": 1220.5,
       "payable_balance": -848.3,
-      "eval_recv_pl": -13.57,
-      "eval_payable_pl": 20.32,
-      "eval_net_pl": 6.75,
+      "eval_recv_pl": -13.52,
+      "eval_payable_pl": 20.42,
+      "eval_net_pl": 6.90,
       "trade_recv_pl": 67.0,
       "trade_payable_pl": -27.8,
       "trade_net_pl": 39.2,
       "settlement_recv": 1997,
       "settlement_payable": -939,
-      "total_net_pl": 45.95
+      "total_net_pl": 46.1
     }
   ],
   "cumulativeData": [
@@ -203,129 +203,129 @@
       "year": 2024,
       "recv_balance": 527.5,
       "payable_balance": -373.4,
-      "eval_recv_pl": 14.4,
-      "eval_payable_pl": -3.6,
-      "eval_net_pl": 10.8,
+      "eval_recv_pl": 13.39,
+      "eval_payable_pl": -3.59,
+      "eval_net_pl": 9.8,
       "trade_recv_pl": 24.7,
       "trade_payable_pl": -21.1,
       "trade_net_pl": 3.6,
       "settlement_recv": 2089,
       "settlement_payable": -969,
-      "total_net_pl": 14.4
+      "total_net_pl": 13.4
     },
     {
       "quarter": "24.2Q",
       "year": 2024,
       "recv_balance": 479.3,
       "payable_balance": -401.3,
-      "eval_recv_pl": 24.7,
-      "eval_payable_pl": -3.9,
-      "eval_net_pl": 20.9,
-      "trade_recv_pl": 17.3,
-      "trade_payable_pl": -8.6,
-      "trade_net_pl": 8.7,
+      "eval_recv_pl": 23.87,
+      "eval_payable_pl": -3.86,
+      "eval_net_pl": 20.01,
+      "trade_recv_pl": 42.0,
+      "trade_payable_pl": -29.7,
+      "trade_net_pl": 12.3,
       "settlement_recv": 2867,
       "settlement_payable": -1318,
-      "total_net_pl": 29.6
+      "total_net_pl": 32.3
     },
     {
       "quarter": "24.3Q",
       "year": 2024,
       "recv_balance": 1018.2,
       "payable_balance": -674.3,
-      "eval_recv_pl": 3.3,
-      "eval_payable_pl": 7.2,
-      "eval_net_pl": 10.5,
-      "trade_recv_pl": -6.8,
-      "trade_payable_pl": 16.3,
-      "trade_net_pl": 9.5,
+      "eval_recv_pl": 2.12,
+      "eval_payable_pl": 7.22,
+      "eval_net_pl": 9.34,
+      "trade_recv_pl": 35.2,
+      "trade_payable_pl": -13.4,
+      "trade_net_pl": 21.8,
       "settlement_recv": 5262,
       "settlement_payable": -2277,
-      "total_net_pl": 20.0
+      "total_net_pl": 31.1
     },
     {
       "quarter": "24.4Q",
       "year": 2024,
       "recv_balance": 491.6,
       "payable_balance": -637.1,
-      "eval_recv_pl": 48.8,
-      "eval_payable_pl": -18.2,
-      "eval_net_pl": 30.6,
-      "trade_recv_pl": 41.7,
-      "trade_payable_pl": -20.7,
-      "trade_net_pl": 21.0,
+      "eval_recv_pl": 48.31,
+      "eval_payable_pl": -18.22,
+      "eval_net_pl": 30.09,
+      "trade_recv_pl": 76.9,
+      "trade_payable_pl": -34.1,
+      "trade_net_pl": 42.8,
       "settlement_recv": 6546,
       "settlement_payable": -2983,
-      "total_net_pl": 51.6
+      "total_net_pl": 72.9
     },
     {
       "quarter": "25.1Q",
       "year": 2025,
       "recv_balance": 735.8,
       "payable_balance": -454.7,
-      "eval_recv_pl": 2.68,
+      "eval_recv_pl": 2.67,
       "eval_payable_pl": -4.43,
-      "eval_net_pl": -1.75,
+      "eval_net_pl": -1.76,
       "trade_recv_pl": -17.8,
       "trade_payable_pl": -12.7,
-      "trade_net_pl": -30.4,
+      "trade_net_pl": -30.5,
       "settlement_recv": 2296,
       "settlement_payable": -1079,
-      "total_net_pl": -32.15
+      "total_net_pl": -32.3
     },
     {
       "quarter": "25.2Q",
       "year": 2025,
-      "recv_balance": 454.2,
+      "recv_balance": 732.5,
       "payable_balance": -479.8,
       "eval_recv_pl": -32.27,
       "eval_payable_pl": 4.75,
       "eval_net_pl": -27.52,
-      "trade_recv_pl": -16.1,
-      "trade_payable_pl": 14.1,
-      "trade_net_pl": -1.9,
+      "trade_recv_pl": -34.8,
+      "trade_payable_pl": 1.4,
+      "trade_net_pl": -33.4,
       "settlement_recv": 3414,
       "settlement_payable": -1665,
-      "total_net_pl": -29.42
+      "total_net_pl": -60.9
     },
     {
       "quarter": "25.3Q",
       "year": 2025,
       "recv_balance": 1684.8,
       "payable_balance": -854.0,
-      "eval_recv_pl": -4.14,
+      "eval_recv_pl": -4.13,
       "eval_payable_pl": -5.72,
-      "eval_net_pl": -9.86,
-      "trade_recv_pl": 42.0,
-      "trade_payable_pl": -9.6,
-      "trade_net_pl": 32.4,
+      "eval_net_pl": -9.85,
+      "trade_recv_pl": 7.2,
+      "trade_payable_pl": -8.2,
+      "trade_net_pl": -1.0,
       "settlement_recv": 6426,
       "settlement_payable": -2931,
-      "total_net_pl": 22.54
+      "total_net_pl": -10.8
     },
     {
       "quarter": "25.4Q",
       "year": 2025,
-      "recv_balance": 1220.4,
+      "recv_balance": 1220.5,
       "payable_balance": -848.3,
-      "eval_recv_pl": -17.71,
-      "eval_payable_pl": 14.6,
-      "eval_net_pl": -3.11,
-      "trade_recv_pl": 109.0,
-      "trade_payable_pl": -37.4,
-      "trade_net_pl": 71.6,
+      "eval_recv_pl": -17.66,
+      "eval_payable_pl": 14.7,
+      "eval_net_pl": -2.97,
+      "trade_recv_pl": 74.1,
+      "trade_payable_pl": -35.8,
+      "trade_net_pl": 38.3,
       "settlement_recv": 8423,
       "settlement_payable": -3870,
-      "total_net_pl": 68.49
+      "total_net_pl": 35.3
     }
   ],
   "currencyRecvEvalPL_Quarterly": [
     {
       "quarter": "24.1Q",
-      "CNY": 5.67,
-      "HKD": 10.78,
-      "USD": 1.81,
-      "TWD": 2.53,
+      "CNY": 0.21,
+      "HKD": 12.23,
+      "USD": 0.89,
+      "TWD": 0.03,
       "EUR": 0.02
     },
     {
@@ -333,7 +333,7 @@
       "CNY": 0.21,
       "HKD": 9.67,
       "USD": -0.06,
-      "TWD": 0.51,
+      "TWD": 0.63,
       "EUR": 0.04
     },
     {
@@ -341,31 +341,31 @@
       "CNY": 0.81,
       "HKD": -19.49,
       "USD": -1.61,
-      "TWD": -1.05,
+      "TWD": -1.36,
       "EUR": -0.11
     },
     {
       "quarter": "24.4Q",
       "CNY": -0.08,
-      "HKD": 38.59,
+      "HKD": 38.56,
       "USD": 3.3,
-      "TWD": 3.3,
+      "TWD": 3.98,
       "EUR": 0.45
     },
     {
       "quarter": "25.1Q",
-      "CNY": 2.37,
-      "HKD": -0.88,
-      "USD": 1.11,
-      "TWD": 1.26,
-      "EUR": 0.5
+      "CNY": 1.22,
+      "HKD": -41.85,
+      "USD": -1.41,
+      "TWD": -3.72,
+      "EUR": 0.1
     },
     {
       "quarter": "25.2Q",
       "CNY": -3.62,
       "HKD": -30.37,
       "USD": -2.95,
-      "TWD": -1.41,
+      "TWD": 2.47,
       "EUR": -0.47
     },
     {
@@ -373,16 +373,16 @@
       "CNY": 10.38,
       "HKD": 17.61,
       "USD": 1.95,
-      "TWD": 0.5,
+      "TWD": -1.83,
       "EUR": 0.03
     },
     {
       "quarter": "25.4Q",
-      "CNY": -12.2,
-      "HKD": -4.3,
-      "USD": -0.7,
-      "TWD": 1.4,
-      "EUR": 0.1
+      "CNY": -21.31,
+      "HKD": 9.31,
+      "USD": -0.8,
+      "TWD": -0.75,
+      "EUR": 0.03
     }
   ],
   "currencyRecvEvalPL_Cumulative": [
@@ -391,7 +391,7 @@
       "CNY": 0.21,
       "HKD": 12.23,
       "USD": 0.89,
-      "TWD": 1.0,
+      "TWD": 0.03,
       "EUR": 0.02
     },
     {
@@ -399,7 +399,7 @@
       "CNY": 0.42,
       "HKD": 21.9,
       "USD": 0.83,
-      "TWD": 1.51,
+      "TWD": 0.66,
       "EUR": 0.06
     },
     {
@@ -407,15 +407,15 @@
       "CNY": 1.23,
       "HKD": 2.41,
       "USD": -0.78,
-      "TWD": 0.46,
+      "TWD": -0.7,
       "EUR": -0.05
     },
     {
       "quarter": "24.4Q",
       "CNY": 1.15,
-      "HKD": 41.0,
+      "HKD": 40.97,
       "USD": 2.52,
-      "TWD": 3.76,
+      "TWD": 3.28,
       "EUR": 0.4
     },
     {
@@ -423,7 +423,7 @@
       "CNY": 2.37,
       "HKD": -0.88,
       "USD": 1.11,
-      "TWD": 1.26,
+      "TWD": -0.44,
       "EUR": 0.5
     },
     {
@@ -431,7 +431,7 @@
       "CNY": -1.25,
       "HKD": -31.25,
       "USD": -1.84,
-      "TWD": -0.15,
+      "TWD": 2.03,
       "EUR": 0.03
     },
     {
@@ -439,71 +439,71 @@
       "CNY": 9.13,
       "HKD": -13.64,
       "USD": 0.11,
-      "TWD": 0.35,
+      "TWD": 0.2,
       "EUR": 0.06
     },
     {
       "quarter": "25.4Q",
-      "CNY": -3.1,
-      "HKD": -17.9,
-      "USD": -0.6,
-      "TWD": 1.8,
-      "EUR": 0.1
+      "CNY": -12.18,
+      "HKD": -4.33,
+      "USD": -0.69,
+      "TWD": -0.55,
+      "EUR": 0.09
     }
   ],
   "currencyPayableEvalPL_Quarterly": [
     {
       "quarter": "24.1Q",
       "USD": -3.57,
-      "EUR": -0.17,
+      "EUR": -0.02,
       "CNY": 0.0,
       "JPY": 0
     },
     {
       "quarter": "24.2Q",
       "USD": -0.29,
-      "EUR": 0.18,
-      "CNY": 0.01,
+      "EUR": 0.02,
+      "CNY": 0.0,
       "JPY": 0
     },
     {
       "quarter": "24.3Q",
       "USD": 11.08,
-      "EUR": 0.05,
-      "CNY": -0.01,
+      "EUR": 0.0,
+      "CNY": 0.0,
       "JPY": 0
     },
     {
       "quarter": "24.4Q",
       "USD": -25.42,
-      "EUR": -0.24,
-      "CNY": -0.01,
+      "EUR": -0.02,
+      "CNY": 0.0,
       "JPY": 0
     },
     {
       "quarter": "25.1Q",
-      "USD": -4.38,
-      "EUR": -0.5,
+      "USD": 13.82,
+      "EUR": -0.03,
       "CNY": 0.0,
       "JPY": 0
     },
     {
       "quarter": "25.2Q",
       "USD": 9.13,
-      "EUR": 0.52,
+      "EUR": 0.05,
       "CNY": 0.0,
       "JPY": 0
     },
     {
       "quarter": "25.3Q",
       "USD": -10.46,
-      "EUR": -0.08,
+      "EUR": -0.01,
       "CNY": 0.0,
       "JPY": 0
     },
     {
       "quarter": "25.4Q",
-      "USD": 14.6,
+      "USD": 20.32,
       "EUR": 0.1,
       "CNY": 0.0,
       "JPY": 0
@@ -513,56 +513,56 @@
     {
       "quarter": "24.1Q",
       "USD": -3.57,
-      "EUR": -0.17,
+      "EUR": -0.02,
       "CNY": 0.0,
       "JPY": 0
     },
     {
       "quarter": "24.2Q",
       "USD": -3.86,
-      "EUR": 0.01,
-      "CNY": 0.01,
+      "EUR": 0.0,
+      "CNY": 0.0,
       "JPY": 0
     },
     {
       "quarter": "24.3Q",
       "USD": 7.22,
-      "EUR": 0.06,
+      "EUR": 0.0,
       "CNY": 0.0,
       "JPY": 0
     },
     {
       "quarter": "24.4Q",
       "USD": -18.2,
-      "EUR": -0.18,
-      "CNY": -0.01,
+      "EUR": -0.02,
+      "CNY": 0.0,
       "JPY": 0
     },
     {
       "quarter": "25.1Q",
       "USD": -4.38,
-      "EUR": -0.5,
+      "EUR": -0.05,
       "CNY": 0.0,
       "JPY": 0
     },
     {
       "quarter": "25.2Q",
       "USD": 4.75,
-      "EUR": 0.02,
+      "EUR": 0.0,
       "CNY": 0.0,
       "JPY": 0
     },
     {
       "quarter": "25.3Q",
       "USD": -5.71,
-      "EUR": -0.06,
+      "EUR": -0.01,
       "CNY": 0.0,
       "JPY": 0
     },
     {
       "quarter": "25.4Q",
-      "USD": 8.9,
-      "EUR": 0.04,
+      "USD": 14.61,
+      "EUR": 0.09,
       "CNY": 0.0,
       "JPY": 0
     }
@@ -571,83 +571,17 @@
     {
       "quarter": "24.1Q",
       "CNY": 21.2,
-      "HKD": 3.2,
+      "HKD": 1.8,
       "USD": 0.1,
-      "TWD": 0,
-      "EUR": 0
-    },
-    {
-      "quarter": "24.2Q",
-      "CNY": -10.4,
-      "HKD": -0.8,
-      "USD": 3.6,
       "TWD": -0.1,
-      "EUR": 0
-    },
-    {
-      "quarter": "24.3Q",
-      "CNY": -22.6,
-      "HKD": -0.7,
-      "USD": -0.4,
-      "TWD": 0.1,
-      "EUR": 0
-    },
-    {
-      "quarter": "24.4Q",
-      "CNY": 50.3,
-      "HKD": 0.8,
-      "USD": -3.6,
-      "TWD": 0,
-      "EUR": 0
-    },
-    {
-      "quarter": "25.1Q",
-      "CNY": -28.3,
-      "HKD": 3.3,
-      "USD": 6.8,
-      "TWD": -0.8,
-      "EUR": 0
-    },
-    {
-      "quarter": "25.2Q",
-      "CNY": 14.5,
-      "HKD": -3.3,
-      "USD": -11.3,
-      "TWD": 0.6,
-      "EUR": 0.9
-    },
-    {
-      "quarter": "25.3Q",
-      "CNY": 55.9,
-      "HKD": 1.9,
-      "USD": 11.4,
-      "TWD": -0.6,
-      "EUR": 0.3
-    },
-    {
-      "quarter": "25.4Q",
-      "CNY": 57.5,
-      "HKD": 1.9,
-      "USD": -20.3,
-      "TWD": 0,
-      "EUR": 0.1
-    }
-  ],
-  "currencyTradePL_Cumulative": [
-    {
-      "quarter": "24.1Q",
-      "CNY": 21.2,
-      "HKD": 3.2,
-      "USD": 0.1,
-      "TWD": 0,
       "EUR": 0
     },
     {
       "quarter": "24.2Q",
       "CNY": 10.8,
-      "HKD": 2.4,
+      "HKD": 1.4,
       "USD": 3.7,
-      "TWD": -0.1,
+      "TWD": -0.3,
       "EUR": 0
     },
     {
@@ -656,11 +590,11 @@
       "HKD": 1.7,
       "USD": 3.3,
       "TWD": 0,
-      "EUR": 0
+      "EUR": 0.1
     },
     {
       "quarter": "24.4Q",
-      "CNY": 38.5,
+      "CNY": 38.4,
       "HKD": 2.5,
       "USD": -0.3,
       "TWD": 0,
@@ -668,7 +602,7 @@
     },
     {
       "quarter": "25.1Q",
-      "CNY": -28.3,
+      "CNY": -28.4,
       "HKD": 3.3,
       "USD": 6.8,
       "TWD": -0.8,
@@ -676,11 +610,11 @@
     },
     {
       "quarter": "25.2Q",
-      "CNY": -13.8,
+      "CNY": -14.6,
       "HKD": 0,
-      "USD": -4.5,
-      "TWD": -0.2,
-      "EUR": 0.9
+      "USD": -4.6,
+      "TWD": -0.1,
+      "EUR": 0.8
     },
     {
       "quarter": "25.3Q",
@@ -688,15 +622,81 @@
       "HKD": -1.4,
       "USD": 0.1,
       "TWD": 0,
-      "EUR": 1.2
+      "EUR": 0
     },
     {
       "quarter": "25.4Q",
-      "CNY": 99.6,
-      "HKD": 0.5,
-      "USD": -20.2,
+      "CNY": 57.5,
+      "HKD": 1.9,
+      "USD": 7.0,
       "TWD": 0,
-      "EUR": 1.3
+      "EUR": 0.1
+    }
+  ],
+  "currencyTradePL_Cumulative": [
+    {
+      "quarter": "24.1Q",
+      "CNY": 21.2,
+      "HKD": 1.8,
+      "USD": 0.1,
+      "TWD": -0.1,
+      "EUR": 0
+    },
+    {
+      "quarter": "24.2Q",
+      "CNY": 32.0,
+      "HKD": 3.2,
+      "USD": 3.8,
+      "TWD": -0.4,
+      "EUR": 0
+    },
+    {
+      "quarter": "24.3Q",
+      "CNY": 20.2,
+      "HKD": 4.9,
+      "USD": 7.1,
+      "TWD": -0.4,
+      "EUR": 0.1
+    },
+    {
+      "quarter": "24.4Q",
+      "CNY": 58.6,
+      "HKD": 7.4,
+      "USD": 6.8,
+      "TWD": -0.4,
+      "EUR": 0.1
+    },
+    {
+      "quarter": "25.1Q",
+      "CNY": -28.4,
+      "HKD": 3.3,
+      "USD": 6.8,
+      "TWD": -0.8,
+      "EUR": 0
+    },
+    {
+      "quarter": "25.2Q",
+      "CNY": -43.0,
+      "HKD": 3.3,
+      "USD": 2.2,
+      "TWD": -0.9,
+      "EUR": 0.8
+    },
+    {
+      "quarter": "25.3Q",
+      "CNY": -0.9,
+      "HKD": 1.9,
+      "USD": 2.3,
+      "TWD": -0.9,
+      "EUR": 0.8
+    },
+    {
+      "quarter": "25.4Q",
+      "CNY": 56.6,
+      "HKD": 3.8,
+      "USD": 9.3,
+      "TWD": -0.9,
+      "EUR": 0.9
     }
   ],
   "currencyBalanceData": [
@@ -1234,51 +1234,78 @@
     }
   ],
   "aiInsight": {
-    "lastUpdated": "2026-01-22",
+    "lastUpdated": "2026-01-23",
+    "salesStructure": {
+      "domesticRatio": 49.7,
+      "domesticAmount": 8886,
+      "exportRatio": 50.3,
+      "exportAmount": 8978,
+      "chinaExportRatio": 46.6,
+      "chinaExportAmount": 8316,
+      "otherExportRatio": 3.7,
+      "otherExportAmount": 662,
+      "description": "FNF 매출 구성: 국내 49.7% (8,886억) + 수출 50.3% (8,978억)"
+    },
     "businessStructure": {
       "recv": {
         "cnyRatio": 62,
         "cnyAmount": 760,
         "hkdAmount": 348,
         "twdAmount": 72,
-        "description": "중국 매출 비중 ~50% → CNY 채권 760억 (전체 채권의 62%)"
+        "totalRecv": 1220,
+        "description": "중국 수출 비중 46.6% (수출의 92.6%) → CNY 채권 760억 (전체 채권의 62%)"
       },
       "pay": {
         "usdAmount": 846,
         "usdHedgeRatio": 4.6,
-        "description": "FOB 전환으로 USD 결제 금액 증가 추세"
+        "usdRecvAmount": 39,
+        "netUsdDebt": 807,
+        "description": "USD 채무 846억 vs 채권 39억 → 순채무 807억 (FOB 전환 영향)"
       }
     },
     "strengths": [
       "순 익스포저 +372억 (채권초과) → 전반적 환율상승 시 유리",
-      "연간 거래손익 +127억 호조 (CNY +100억, USD +35억)",
+      "25년 누적 거래손익 +38.3억 호조 (채권 +74.1억, 채무 -35.8억)",
       "EUR 자연헤지 89% 달성 (채권 2.7억 vs 채무 2.4억)"
     ],
     "risks": [
-      "CNY 집중도 62% → 위안화 급락 시 대규모 손실",
-      "USD 순채무 807억 → 달러 강세 시 평가손실",
-      "누적 평가손실 -10.7억 (CNY/HKD 환율 하락 영향)"
+      "CNY 집중도 62% (760억) → 위안화 10% 급락 시 76억 손실 가능",
+      "USD 순채무 807억 → 달러 10% 강세 시 81억 평가손실",
+      "중국 수출 의존도 46.6% → 미중 무역갈등 리스크 내재"
     ],
     "fxOutlook": {
       "usd": {
         "current": 1435,
-        "forecast": "1,400원대",
-        "source": "TradingEconomics, Investing.com (26.1월)",
-        "comment": "이재명 대통령: 2개월 내 1,400원 복귀 전망, 한국은행: 금리 동결, 환율 안정 정책 강화",
-        "impact": "F&F: USD 채무 부담 완화 기대"
+        "forecastRange": "1,380~1,500원",
+        "source": "KB금융, BofA, 하나금융, Trading Economics (26.1월)",
+        "comment": "미국 연준 금리 동결 기조 지속, 글로벌 경기 불확실성으로 달러 강세 유지",
+        "impact": "F&F: USD 채무 리스크 모니터링 필요",
+        "institutionalForecasts": [
+          {"institution": "KB금융", "q1": 1420, "q2": 1380, "yearEnd": 1300, "trend": "down"},
+          {"institution": "BofA", "q1": 1450, "q2": 1420, "yearEnd": 1395, "trend": "stable"},
+          {"institution": "하나금융", "q1": 1430, "q2": 1400, "yearEnd": 1380, "trend": "down"},
+          {"institution": "Trading Economics", "q1": 1445, "q2": 1460, "yearEnd": 1500, "trend": "up"}
+        ]
       },
       "cny": {
         "current": 205,
-        "forecast": "203~206원",
-        "source": "wonforecast.com, TradingEconomics (26.1월)",
-        "comment": "인민은행: 기준환율 7.00 유지, 약세 관리, 1월 평균 205원, 2월 204원 전망",
-        "impact": "F&F: CNY 채권 760억 변동성 주의"
+        "forecastRange": "195~215원",
+        "source": "인민은행, Trading Economics, Wonforecast, 신한금융 (26.1월)",
+        "comment": "중국 경기 둔화 우려, 미중 무역갈등 장기화 전망",
+        "impact": "F&F: CNY 채권 760억 리스크 모니터링",
+        "institutionalForecasts": [
+          {"institution": "인민은행", "q1": 203, "q2": 200, "yearEnd": 195, "trend": "down"},
+          {"institution": "Trading Economics", "q1": 206, "q2": 208, "yearEnd": 215, "trend": "up"},
+          {"institution": "Wonforecast", "q1": 204, "q2": 205, "yearEnd": 206, "trend": "stable"},
+          {"institution": "신한금융", "q1": 202, "q2": 198, "yearEnd": 195, "trend": "down"}
+        ]
       },
       "overall": {
-        "rating": "중립~긍정",
-        "comment": "원화 강세 전환 시 CNY 채권 평가손실, 반면 USD 채무 부담 완화 가능",
-        "warning": "글로벌 달러 강세 리스크 모니터링"
-      }
+        "rating": "변동성 확대",
+        "comment": "단기 관리에 집중, 상/하반기 시나리오 대비 필요",
+        "warning": "글로벌 달러 강세 및 위안화 변동성 리스크 모니터링"
+      },
+      "lastUpdated": "2026-01-23"
     },
     "hedgeActions": [
       {

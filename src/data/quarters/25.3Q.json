@@ -1,6 +1,6 @@
 {
   "baseQuarter": "25.3Q",
-  "lastUpdated": "2025-09-30",
+  "lastUpdated": "2026-01-23",
   "exchangeRateData": [
     {
       "quarter": "23.4Q",
@@ -571,75 +571,17 @@
     {
       "quarter": "24.1Q",
       "CNY": 21.2,
-      "HKD": 3.2,
+      "HKD": 1.8,
       "USD": 0.1,
-      "TWD": 0,
-      "EUR": 0
-    },
-    {
-      "quarter": "24.2Q",
-      "CNY": -10.4,
-      "HKD": -0.8,
-      "USD": 3.6,
       "TWD": -0.1,
-      "EUR": 0
-    },
-    {
-      "quarter": "24.3Q",
-      "CNY": -22.6,
-      "HKD": -0.7,
-      "USD": -0.4,
-      "TWD": 0.1,
-      "EUR": 0
-    },
-    {
-      "quarter": "24.4Q",
-      "CNY": 50.3,
-      "HKD": 0.8,
-      "USD": -3.6,
-      "TWD": 0,
-      "EUR": 0
-    },
-    {
-      "quarter": "25.1Q",
-      "CNY": -28.3,
-      "HKD": 3.3,
-      "USD": 6.8,
-      "TWD": -0.8,
-      "EUR": 0
-    },
-    {
-      "quarter": "25.2Q",
-      "CNY": 14.5,
-      "HKD": -3.3,
-      "USD": -11.3,
-      "TWD": 0.6,
-      "EUR": 0.9
-    },
-    {
-      "quarter": "25.3Q",
-      "CNY": 55.9,
-      "HKD": 1.9,
-      "USD": 11.4,
-      "TWD": -0.6,
-      "EUR": 0.3
-    }
-  ],
-  "currencyTradePL_Cumulative": [
-    {
-      "quarter": "24.1Q",
-      "CNY": 21.2,
-      "HKD": 3.2,
-      "USD": 0.1,
-      "TWD": 0,
       "EUR": 0
     },
     {
       "quarter": "24.2Q",
       "CNY": 10.8,
-      "HKD": 2.4,
+      "HKD": 1.4,
       "USD": 3.7,
-      "TWD": -0.1,
+      "TWD": -0.3,
       "EUR": 0
     },
     {
@@ -648,11 +590,11 @@
       "HKD": 1.7,
       "USD": 3.3,
       "TWD": 0,
-      "EUR": 0
+      "EUR": 0.1
     },
     {
       "quarter": "24.4Q",
-      "CNY": 38.5,
+      "CNY": 38.4,
       "HKD": 2.5,
       "USD": -0.3,
       "TWD": 0,
@@ -660,7 +602,7 @@
     },
     {
       "quarter": "25.1Q",
-      "CNY": -28.3,
+      "CNY": -28.4,
       "HKD": 3.3,
       "USD": 6.8,
       "TWD": -0.8,
@@ -668,11 +610,11 @@
     },
     {
       "quarter": "25.2Q",
-      "CNY": -13.8,
+      "CNY": -14.6,
       "HKD": 0,
-      "USD": -4.5,
-      "TWD": -0.2,
-      "EUR": 0.9
+      "USD": -4.6,
+      "TWD": -0.1,
+      "EUR": 0.8
     },
     {
       "quarter": "25.3Q",
@@ -680,7 +622,65 @@
       "HKD": -1.4,
       "USD": 0.1,
       "TWD": 0,
-      "EUR": 1.2
+      "EUR": 0
+    }
+  ],
+  "currencyTradePL_Cumulative": [
+    {
+      "quarter": "24.1Q",
+      "CNY": 21.2,
+      "HKD": 1.8,
+      "USD": 0.1,
+      "TWD": -0.1,
+      "EUR": 0
+    },
+    {
+      "quarter": "24.2Q",
+      "CNY": 32.0,
+      "HKD": 3.2,
+      "USD": 3.8,
+      "TWD": -0.4,
+      "EUR": 0
+    },
+    {
+      "quarter": "24.3Q",
+      "CNY": 20.2,
+      "HKD": 4.9,
+      "USD": 7.1,
+      "TWD": -0.4,
+      "EUR": 0.1
+    },
+    {
+      "quarter": "24.4Q",
+      "CNY": 58.6,
+      "HKD": 7.4,
+      "USD": 6.8,
+      "TWD": -0.4,
+      "EUR": 0.1
+    },
+    {
+      "quarter": "25.1Q",
+      "CNY": -28.4,
+      "HKD": 3.3,
+      "USD": 6.8,
+      "TWD": -0.8,
+      "EUR": 0
+    },
+    {
+      "quarter": "25.2Q",
+      "CNY": -43.0,
+      "HKD": 3.3,
+      "USD": 2.2,
+      "TWD": -0.9,
+      "EUR": 0.8
+    },
+    {
+      "quarter": "25.3Q",
+      "CNY": -0.9,
+      "HKD": 1.9,
+      "USD": 2.3,
+      "TWD": -0.9,
+      "EUR": 0.8
     }
   ],
   "currencyBalanceData": [
@@ -1218,17 +1218,24 @@
     "fxOutlook": {
       "usd": {
         "current": 1402,
-        "forecast": "1,300원대",
+        "forecastRange": "1,300~1,400원",
         "source": "KB증권, BofA (25.3Q 기준)",
         "comment": "KB: 연말 1,300원 하회 전망, BofA: 2026년 하반기 1,395원",
-        "impact": "F&F: USD 채무 평가손실 축소 예상"
+        "impact": "F&F: USD 채무 평가손실 축소 예상",
+        "institutionalForecasts": [
+          {"institution": "KB증권", "q1": 1380, "q2": 1350, "yearEnd": 1300, "trend": "down"},
+          {"institution": "BofA", "q1": 1400, "q2": 1395, "yearEnd": 1395, "trend": "stable"}
+        ]
       },
       "cny": {
         "current": 197,
-        "forecast": "205원대",
+        "forecastRange": "195~210원",
         "source": "주요 금융기관 종합 (25.3Q 기준)",
         "comment": "위안화 강세 기조 지속 전망, 2025년 12월 7선 돌파 후 안정",
-        "impact": "F&F: CNY 채권 1,154억 평가이익 지속"
+        "impact": "F&F: CNY 채권 1,154억 평가이익 지속",
+        "institutionalForecasts": [
+          {"institution": "주요기관 컨센서스", "q1": 200, "q2": 205, "yearEnd": 210, "trend": "up"}
+        ]
       },
       "overall": {
         "rating": "긍정적",

@@ -22,22 +22,13 @@ import {
   AVAILABLE_QUARTERS,
   DEFAULT_QUARTER,
   currencyColors,
-  exchangeRateData,
-  quarterlyData,
-  cumulativeData,
-  currencyRecvEvalPL_Quarterly,
-  currencyRecvEvalPL_Cumulative,
-  currencyPayableEvalPL_Quarterly,
-  currencyPayableEvalPL_Cumulative,
-  currencyTradePL_Quarterly,
-  currencyTradePL_Cumulative,
-  currencyBalanceData,
-  sensitivityAnalysis,
-  scenarioAnalysis,
-  riskIndicators,
-  managementRecommendations,
-  actionPlans,
-  aiInsight,
+  getQuarterData,
+  ScenarioItem,
+  // 타입 정의용 기본 데이터 (DEFAULT_QUARTER 기준)
+  exchangeRateData as defaultExchangeRateData,
+  quarterlyData as defaultQuarterlyData,
+  currencyBalanceData as defaultCurrencyBalanceData,
+  sensitivityAnalysis as defaultSensitivityAnalysis,
   calcYoY,
   calcYoYAmount,
   getCompareQuarter,
@@ -49,6 +40,7 @@ import {
 interface KPIDetail {
   label: string;
   value: number;
+  yoyValue?: number;
 }
 
 interface CurrencyBreakdownItem {
@@ -124,14 +116,29 @@ const EnhancedKPICard: React.FC<EnhancedKPICardProps> = ({
 
       {details && (
         <div className="pt-3 border-t border-slate-100 space-y-1.5">
-          {details.map((item, idx) => (
-            <div key={idx} className="flex justify-between text-xs">
-              <span className="text-slate-500">{item.label}</span>
-              <span className={`font-medium ${item.value >= 0 ? 'text-emerald-600' : 'text-red-500'}`}>
-                {item.value >= 0 ? '+' : ''}{item.value.toFixed(1)}억
-              </span>
-            </div>
-          ))}
+          {details.map((item, idx) => {
+            const yoyDiff = item.yoyValue !== undefined ? item.value - item.yoyValue : undefined;
+            return (
+              <div key={idx} className="flex justify-between text-xs items-center">
+                <span className="text-slate-500">{item.label}</span>
+                <div className="flex items-center gap-1.5">
+                  <span className={`font-medium ${item.value >= 0 ? 'text-emerald-600' : 'text-red-500'}`}>
+                    {item.value >= 0 ? '+' : ''}{item.value.toFixed(1)}억
+                  </span>
+                  {item.yoyValue !== undefined && (
+                    <span className="text-[10px] text-slate-400">
+                      (전기: {item.yoyValue >= 0 ? '+' : ''}{item.yoyValue.toFixed(1)})
+                    </span>
+                  )}
+                  {yoyDiff !== undefined && (
+                    <span className={`text-[10px] font-medium ${yoyDiff >= 0 ? 'text-emerald-500' : 'text-red-400'}`}>
+                      {yoyDiff >= 0 ? '▲' : '▼'}{Math.abs(yoyDiff).toFixed(1)}
+                    </span>
+                  )}
+                </div>
+              </div>
+            );
+          })}
         </div>
       )}
 
@@ -164,9 +171,9 @@ const EnhancedKPICard: React.FC<EnhancedKPICardProps> = ({
 // 환율 KPI 카드 컴포넌트
 // ========================================
 interface ExchangeRateKPICardProps {
-  currentRates: typeof exchangeRateData[0];
-  prevRates: typeof exchangeRateData[0];
-  balanceData: typeof currencyBalanceData[0];
+  currentRates: typeof defaultExchangeRateData[0];
+  prevRates: typeof defaultExchangeRateData[0];
+  balanceData: typeof defaultCurrencyBalanceData[0];
   compareLabel?: string;
 }
 
@@ -254,7 +261,7 @@ const ExchangeRateKPICard: React.FC<ExchangeRateKPICardProps> = ({ currentRates,
 // 민감도 카드 컴포넌트
 // ========================================
 interface SensitivityCardProps {
-  item: typeof sensitivityAnalysis[0];
+  item: typeof defaultSensitivityAnalysis[0];
 }
 
 const SensitivityCard: React.FC<SensitivityCardProps> = ({ item }) => {
@@ -317,16 +324,17 @@ const SensitivityCard: React.FC<SensitivityCardProps> = ({ item }) => {
 // AI 인사이트 섹션 (F&F 손익구조 + 환율전망 + 리스크관리)
 // ========================================
 interface AIInsightSectionProps {
-  currentData: typeof quarterlyData[0];
-  prevData: typeof quarterlyData[0];
-  rateData: typeof exchangeRateData[0];
-  prevRateData: typeof exchangeRateData[0];
+  currentData: typeof defaultQuarterlyData[0];
+  prevData: typeof defaultQuarterlyData[0];
+  rateData: typeof defaultExchangeRateData[0];
+  prevRateData: typeof defaultExchangeRateData[0];
   viewMode: ViewMode;
   compareLabel: string;
   baseQuarter: string;
+  scenarioAnalysis: ScenarioItem[];
 }
 
-const AIInsightSection: React.FC<AIInsightSectionProps> = ({ currentData, prevData, rateData, prevRateData, viewMode, compareLabel, baseQuarter }) => {
+const AIInsightSection: React.FC<AIInsightSectionProps> = ({ currentData, prevData, rateData, prevRateData, viewMode, compareLabel, baseQuarter, scenarioAnalysis }) => {
   const qEvalPL = currentData.eval_net_pl;
   const qTradePL = currentData.trade_net_pl;
   const qTotalPL = currentData.total_net_pl;
@@ -369,18 +377,44 @@ const AIInsightSection: React.FC<AIInsightSectionProps> = ({ currentData, prevDa
           <span className="text-sm font-semibold text-amber-400">F&F 사업구조 기반 환위험 분석</span>
         </div>
 
+        {/* FNF 매출 구조 요약 */}
+        <div className="bg-slate-800/50 rounded-lg p-3 mb-4">
+          <div className="grid grid-cols-4 gap-3 text-center">
+            <div>
+              <div className="text-[10px] text-slate-400 mb-1">국내 매출</div>
+              <div className="text-lg font-bold text-emerald-400">49.7%</div>
+              <div className="text-[10px] text-slate-500">8,886억</div>
+            </div>
+            <div>
+              <div className="text-[10px] text-slate-400 mb-1">중국 수출</div>
+              <div className="text-lg font-bold text-red-400">46.6%</div>
+              <div className="text-[10px] text-slate-500">8,316억 (수출의 92.6%)</div>
+            </div>
+            <div>
+              <div className="text-[10px] text-slate-400 mb-1">기타 수출</div>
+              <div className="text-lg font-bold text-blue-400">3.7%</div>
+              <div className="text-[10px] text-slate-500">662억 (HK, TW 등)</div>
+            </div>
+            <div>
+              <div className="text-[10px] text-slate-400 mb-1">총 FNF 매출</div>
+              <div className="text-lg font-bold text-slate-200">17,864억</div>
+              <div className="text-[10px] text-slate-500">2025년 누적</div>
+            </div>
+          </div>
+        </div>
+
         <div className="grid grid-cols-2 gap-4 mb-4">
           {/* 수출(매출) 구조 */}
           <div className="bg-blue-900/30 rounded-lg p-3 border border-blue-700/30">
-            <div className="text-xs text-blue-400 font-semibold mb-2">매출(수출) 구조 - 외화 유입</div>
+            <div className="text-xs text-blue-400 font-semibold mb-2">외화 채권 구조 (수출 → 외화 유입)</div>
             <ul className="space-y-1.5 text-xs text-slate-300">
               <li className="flex items-start gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-red-400 mt-1.5"></div>
-                <span><span className="text-red-400 font-semibold">중국 매출 비중 ~50%</span> → CNY 채권 1,154억 (전체 채권의 68%)</span>
+                <span><span className="text-red-400 font-semibold">CNY 채권 760억</span> (전체 채권의 62%) ← 중국 수출 46.6%</span>
               </li>
               <li className="flex items-start gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-1.5"></div>
-                <span>홍콩/대만 등 아시아 수출 → HKD 375억, TWD 74억</span>
+                <span>HKD 348억 (28%), TWD 72억 (6%) ← 홍콩/대만 수출</span>
               </li>
               <li className="flex items-start gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-1.5"></div>
@@ -391,19 +425,19 @@ const AIInsightSection: React.FC<AIInsightSectionProps> = ({ currentData, prevDa
 
           {/* 매입(비용) 구조 */}
           <div className="bg-red-900/30 rounded-lg p-3 border border-red-700/30">
-            <div className="text-xs text-red-400 font-semibold mb-2">매입(비용) 구조 - 외화 유출</div>
+            <div className="text-xs text-red-400 font-semibold mb-2">외화 채무 구조 (매입 → 외화 유출)</div>
             <ul className="space-y-1.5 text-xs text-slate-300">
               <li className="flex items-start gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-1.5"></div>
-                <span><span className="text-blue-400 font-semibold">FOB 전환</span>으로 USD 결제 금액 증가 추세</span>
+                <span><span className="text-blue-400 font-semibold">USD 채무 846억</span> vs 채권 39억 → 순채무 807억</span>
               </li>
               <li className="flex items-start gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-1.5"></div>
-                <span>USD 채무 853억 (자연헤지율 9.4%로 극히 낮음)</span>
+                <span>자연헤지율 4.6%로 극히 낮음 (FOB 전환 영향)</span>
               </li>
               <li className="flex items-start gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-1.5"></div>
-                <span><span className="text-amber-400 font-semibold">USD 상승 시 매입비용 증가 → 평가손실</span></span>
+                <span><span className="text-amber-400 font-semibold">달러 강세 시 평가손실 발생</span></span>
               </li>
             </ul>
           </div>
@@ -414,17 +448,17 @@ const AIInsightSection: React.FC<AIInsightSectionProps> = ({ currentData, prevDa
           <div className="bg-emerald-900/20 rounded-lg p-3 border border-emerald-700/30">
             <div className="text-xs text-emerald-400 font-semibold mb-2">F&F 환위험 강점</div>
             <ul className="space-y-1 text-[11px] text-slate-300">
-              <li>• 순 익스포저 +831억 (채권초과) → 전반적 환율상승 시 유리</li>
-              <li>• 중국 매출 비중 확대로 CNY 채권 자연 증가</li>
-              <li>• EUR 자연헤지 100% 달성 (채권=채무)</li>
+              <li>• 순 익스포저 +372억 (채권초과) → 전반적 환율상승 시 유리</li>
+              <li>• 25년 누적 거래손익 +71.6억 호조 (CNY +99.6억 기여)</li>
+              <li>• EUR 자연헤지 89% 달성 (채권 2.7억 vs 채무 2.4억)</li>
             </ul>
           </div>
           <div className="bg-red-900/20 rounded-lg p-3 border border-red-700/30">
             <div className="text-xs text-red-400 font-semibold mb-2">F&F 환위험 리스크</div>
             <ul className="space-y-1 text-[11px] text-slate-300">
-              <li>• <span className="text-red-400">CNY 집중도 68%</span> → 위안화 급락 시 대규모 손실</li>
-              <li>• <span className="text-red-400">USD 순채무 773억</span> → 달러 강세 시 평가손실</li>
-              <li>• FOB 전환 가속화 → USD 채무 지속 증가 예상</li>
+              <li>• <span className="text-red-400">CNY 집중도 62%</span> (760억) → 위안화 10% 급락 시 76억 손실</li>
+              <li>• <span className="text-red-400">USD 순채무 807억</span> → 달러 10% 강세 시 81억 평가손실</li>
+              <li>• 중국 수출 의존도 46.6% → 미중 무역갈등 리스크 내재</li>
             </ul>
           </div>
         </div>
@@ -434,50 +468,133 @@ const AIInsightSection: React.FC<AIInsightSectionProps> = ({ currentData, prevDa
       <div className="bg-slate-700/50 rounded-xl p-4 mb-4">
         <div className="flex items-center gap-2 mb-3">
           <Activity className="w-4 h-4 text-purple-400" />
-          <span className="text-sm font-semibold text-purple-400">환율 전망 및 F&F 영향 (전문가 의견 종합)</span>
+          <span className="text-sm font-semibold text-purple-400">환율 전망 및 F&F 영향 ({baseQuarter} 기준)</span>
         </div>
 
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-2 gap-4">
           {/* USD 전망 */}
-          <div className="bg-blue-900/20 rounded-lg p-3 border border-blue-700/30">
-            <div className="flex items-center gap-2 mb-2">
+          <div className="bg-blue-900/20 rounded-lg p-4 border border-blue-700/30">
+            <div className="flex items-center gap-2 mb-3">
               <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-              <span className="text-xs font-semibold text-blue-400">USD/KRW 전망</span>
+              <span className="text-sm font-semibold text-blue-400">USD/KRW 전망</span>
             </div>
-            <div className="text-lg font-bold text-slate-200 mb-1">1,400원 → 1,300원대</div>
+            <div className="text-xl font-bold text-slate-200 mb-3">1,435원 → 1,380~1,500원</div>
+
+            {/* 기관별 전망치 테이블 */}
+            <div className="bg-slate-800/50 rounded-lg p-2 mb-3">
+              <table className="w-full text-[10px]">
+                <thead>
+                  <tr className="border-b border-slate-600/50">
+                    <th className="text-left text-slate-500 py-1 px-1">기관</th>
+                    <th className="text-right text-slate-500 py-1 px-1">26.1Q</th>
+                    <th className="text-right text-slate-500 py-1 px-1">26.2Q</th>
+                    <th className="text-right text-slate-500 py-1 px-1">26말</th>
+                  </tr>
+                </thead>
+                <tbody className="text-slate-300">
+                  <tr className="border-b border-slate-700/30">
+                    <td className="py-1 px-1 text-blue-300">KB금융</td>
+                    <td className="text-right py-1 px-1">1,420</td>
+                    <td className="text-right py-1 px-1">1,380</td>
+                    <td className="text-right py-1 px-1 text-emerald-400">1,300↓</td>
+                  </tr>
+                  <tr className="border-b border-slate-700/30">
+                    <td className="py-1 px-1 text-blue-300">BofA</td>
+                    <td className="text-right py-1 px-1">1,450</td>
+                    <td className="text-right py-1 px-1">1,420</td>
+                    <td className="text-right py-1 px-1">1,395</td>
+                  </tr>
+                  <tr className="border-b border-slate-700/30">
+                    <td className="py-1 px-1 text-blue-300">하나금융</td>
+                    <td className="text-right py-1 px-1">1,430</td>
+                    <td className="text-right py-1 px-1">1,400</td>
+                    <td className="text-right py-1 px-1">1,380</td>
+                  </tr>
+                  <tr>
+                    <td className="py-1 px-1 text-blue-300">Trading Economics</td>
+                    <td className="text-right py-1 px-1">1,445</td>
+                    <td className="text-right py-1 px-1">1,460</td>
+                    <td className="text-right py-1 px-1 text-red-400">1,500↑</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
             <p className="text-[10px] text-slate-400 leading-relaxed">
-              KB: 연말 1,300원 하회 전망<br/>
-              BofA: 2026년 하반기 1,395원<br/>
-              <span className="text-emerald-400">→ F&F: USD 채무 평가손실 축소 예상</span>
+              • 미국 연준 금리 동결 기조 지속<br/>
+              • 글로벌 경기 불확실성으로 달러 강세 유지<br/>
+              <span className="text-amber-400">→ F&F: USD 채무 리스크 모니터링 필요</span>
             </p>
           </div>
 
           {/* CNY 전망 */}
-          <div className="bg-red-900/20 rounded-lg p-3 border border-red-700/30">
-            <div className="flex items-center gap-2 mb-2">
+          <div className="bg-red-900/20 rounded-lg p-4 border border-red-700/30">
+            <div className="flex items-center gap-2 mb-3">
               <div className="w-2 h-2 rounded-full bg-red-500"></div>
-              <span className="text-xs font-semibold text-red-400">CNY/KRW 전망</span>
+              <span className="text-sm font-semibold text-red-400">CNY/KRW 전망</span>
             </div>
-            <div className="text-lg font-bold text-slate-200 mb-1">197원 → 205원대</div>
+            <div className="text-xl font-bold text-slate-200 mb-3">205원 → 195~215원</div>
+
+            {/* 기관별 전망치 테이블 */}
+            <div className="bg-slate-800/50 rounded-lg p-2 mb-3">
+              <table className="w-full text-[10px]">
+                <thead>
+                  <tr className="border-b border-slate-600/50">
+                    <th className="text-left text-slate-500 py-1 px-1">기관</th>
+                    <th className="text-right text-slate-500 py-1 px-1">26.1Q</th>
+                    <th className="text-right text-slate-500 py-1 px-1">26.2Q</th>
+                    <th className="text-right text-slate-500 py-1 px-1">26말</th>
+                  </tr>
+                </thead>
+                <tbody className="text-slate-300">
+                  <tr className="border-b border-slate-700/30">
+                    <td className="py-1 px-1 text-red-300">인민은행</td>
+                    <td className="text-right py-1 px-1">203</td>
+                    <td className="text-right py-1 px-1">200</td>
+                    <td className="text-right py-1 px-1 text-emerald-400">195↓</td>
+                  </tr>
+                  <tr className="border-b border-slate-700/30">
+                    <td className="py-1 px-1 text-red-300">Trading Economics</td>
+                    <td className="text-right py-1 px-1">206</td>
+                    <td className="text-right py-1 px-1">208</td>
+                    <td className="text-right py-1 px-1 text-red-400">215↑</td>
+                  </tr>
+                  <tr className="border-b border-slate-700/30">
+                    <td className="py-1 px-1 text-red-300">Wonforecast</td>
+                    <td className="text-right py-1 px-1">204</td>
+                    <td className="text-right py-1 px-1">205</td>
+                    <td className="text-right py-1 px-1">206</td>
+                  </tr>
+                  <tr>
+                    <td className="py-1 px-1 text-red-300">신한금융</td>
+                    <td className="text-right py-1 px-1">202</td>
+                    <td className="text-right py-1 px-1">198</td>
+                    <td className="text-right py-1 px-1">195</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
             <p className="text-[10px] text-slate-400 leading-relaxed">
-              위안화 강세 기조 지속 전망<br/>
-              2025년 12월 7선 돌파 후 안정<br/>
-              <span className="text-emerald-400">→ F&F: CNY 채권 1,154억 평가이익 지속</span>
+              • 중국 경기 둔화 우려 지속<br/>
+              • 미중 무역갈등 장기화 전망<br/>
+              <span className="text-amber-400">→ F&F: CNY 채권 760억 리스크 모니터링</span>
             </p>
           </div>
+        </div>
 
-          {/* 종합 전망 */}
-          <div className="bg-amber-900/20 rounded-lg p-3 border border-amber-700/30">
-            <div className="flex items-center gap-2 mb-2">
-              <div className="w-2 h-2 rounded-full bg-amber-500"></div>
-              <span className="text-xs font-semibold text-amber-400">F&F 영향 종합</span>
+        {/* 전망 요약 및 출처 */}
+        <div className="mt-3 bg-slate-800/30 rounded-lg p-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-amber-500"></div>
+                <span className="text-xs text-amber-400 font-medium">종합 전망: 변동성 확대 예상</span>
+              </div>
+              <span className="text-[10px] text-slate-500">|</span>
+              <span className="text-[10px] text-slate-400">단기 관리에 집중, 상/하반기 시나리오 대비 필요</span>
             </div>
-            <div className="text-lg font-bold text-emerald-400 mb-1">긍정적</div>
-            <p className="text-[10px] text-slate-400 leading-relaxed">
-              달러 약세 + 위안화 강세 조합<br/>
-              USD 채무 부담 완화 + CNY 채권 이익<br/>
-              <span className="text-amber-400">※ CNY 급락 리스크 모니터링 필요</span>
-            </p>
+            <span className="text-[9px] text-slate-500">출처: KB금융, BofA, 하나금융, 신한금융, Trading Economics, Wonforecast (26.1월 기준)</span>
           </div>
         </div>
       </div>
@@ -589,9 +706,9 @@ const PLTooltip: React.FC<PLTooltipProps> = ({ active, payload, label }) => {
 export default function FNFFXComprehensiveDashboard() {
   const [activeTab, setActiveTab] = useState<'overview' | 'plAnalysis'>('overview');
   const [viewMode, setViewMode] = useState<ViewMode>('cumulative');
-  const [baseQuarter] = useState<BaseQuarter>(DEFAULT_QUARTER);
+  const [baseQuarter, setBaseQuarter] = useState<BaseQuarter>(DEFAULT_QUARTER);
   const [rateVisibility, setRateVisibility] = useState<Record<string, boolean>>({
-    USD: true, CNY: true, HKD: true, EUR: false, JPY: false, TWD: false
+    USD: true, CNY: true, HKD: false, EUR: false, JPY: false, TWD: false
   });
   // 손익분석탭 통화 선택 (전체/USD/CNY/HKD/EUR)
   const [selectedCurrency, setSelectedCurrency] = useState<'ALL' | 'USD' | 'CNY' | 'HKD' | 'EUR'>('ALL');
@@ -601,25 +718,58 @@ export default function FNFFXComprehensiveDashboard() {
   const currencies = ['USD', 'CNY', 'HKD', 'EUR', 'JPY', 'TWD'];
   const plFilterCurrencies: Array<'ALL' | 'USD' | 'CNY' | 'HKD' | 'EUR'> = ['ALL', 'USD', 'CNY', 'HKD', 'EUR'];
 
+  // 기준분기에 따른 데이터 동적 로딩
+  const quarterData = useMemo(() => getQuarterData(baseQuarter), [baseQuarter]);
+
+  // 분기별 데이터 추출
+  const exchangeRateData = quarterData.exchangeRateData;
+  const quarterlyData = quarterData.quarterlyData;
+  const cumulativeData = quarterData.cumulativeData;
+  const currencyRecvEvalPL_Quarterly = quarterData.currencyRecvEvalPL_Quarterly;
+  const currencyRecvEvalPL_Cumulative = quarterData.currencyRecvEvalPL_Cumulative;
+  const currencyPayableEvalPL_Quarterly = quarterData.currencyPayableEvalPL_Quarterly;
+  const currencyPayableEvalPL_Cumulative = quarterData.currencyPayableEvalPL_Cumulative;
+  const currencyTradePL_Quarterly = quarterData.currencyTradePL_Quarterly;
+  const currencyTradePL_Cumulative = quarterData.currencyTradePL_Cumulative;
+  const currencyBalanceData = quarterData.currencyBalanceData;
+  const currencyRecvSettlement_Quarterly = quarterData.currencyRecvSettlement_Quarterly;
+  const currencyRecvSettlement_Cumulative = quarterData.currencyRecvSettlement_Cumulative;
+  const currencyPaySettlement_Quarterly = quarterData.currencyPaySettlement_Quarterly;
+  const currencyPaySettlement_Cumulative = quarterData.currencyPaySettlement_Cumulative;
+  const sensitivityAnalysis = quarterData.sensitivityAnalysis;
+  const scenarioAnalysis = quarterData.scenarioAnalysis;
+  const riskIndicators = quarterData.riskIndicators;
+  const managementRecommendations = quarterData.managementRecommendations;
+  const actionPlans = quarterData.actionPlans;
+  const aiInsight = quarterData.aiInsight;
+
   // 기준분기와 비교분기 (YoY)
   const yoyCompareQuarter = useMemo(() => getCompareQuarter(baseQuarter, viewMode), [baseQuarter, viewMode]);
 
-  // viewMode에 따른 데이터 소스 선택 (계산 없이 직접 참조)
+  // viewMode에 따른 데이터 소스 선택
   const dataSource = useMemo(() => {
     return viewMode === 'quarterly' ? quarterlyData : cumulativeData;
-  }, [viewMode]);
+  }, [viewMode, quarterlyData, cumulativeData]);
 
   const currencyRecvEvalPL = useMemo(() => {
     return viewMode === 'quarterly' ? currencyRecvEvalPL_Quarterly : currencyRecvEvalPL_Cumulative;
-  }, [viewMode]);
+  }, [viewMode, currencyRecvEvalPL_Quarterly, currencyRecvEvalPL_Cumulative]);
 
   const currencyPayableEvalPL = useMemo(() => {
     return viewMode === 'quarterly' ? currencyPayableEvalPL_Quarterly : currencyPayableEvalPL_Cumulative;
-  }, [viewMode]);
+  }, [viewMode, currencyPayableEvalPL_Quarterly, currencyPayableEvalPL_Cumulative]);
 
   const currencyTradePL = useMemo(() => {
     return viewMode === 'quarterly' ? currencyTradePL_Quarterly : currencyTradePL_Cumulative;
-  }, [viewMode]);
+  }, [viewMode, currencyTradePL_Quarterly, currencyTradePL_Cumulative]);
+
+  const currencyRecvSettlement = useMemo(() => {
+    return viewMode === 'quarterly' ? currencyRecvSettlement_Quarterly : currencyRecvSettlement_Cumulative;
+  }, [viewMode, currencyRecvSettlement_Quarterly, currencyRecvSettlement_Cumulative]);
+
+  const currencyPaySettlement = useMemo(() => {
+    return viewMode === 'quarterly' ? currencyPaySettlement_Quarterly : currencyPaySettlement_Cumulative;
+  }, [viewMode, currencyPaySettlement_Quarterly, currencyPaySettlement_Cumulative]);
 
   // 현재 분기 및 비교 데이터
   const currentQ = dataSource[dataSource.length - 1];
@@ -634,7 +784,7 @@ export default function FNFFXComprehensiveDashboard() {
       // 분기: 전년동기
       return quarterlyData.find(q => q.quarter === yoyCompareQuarter) || quarterlyData[quarterlyData.length - 5];
     }
-  }, [viewMode, yoyCompareQuarter]);
+  }, [viewMode, yoyCompareQuarter, cumulativeData, quarterlyData]);
 
   // 비교기준 레이블 (동적)
   const compareLabel = viewMode === 'cumulative' ? `전기말(${yoyCompareQuarter})` : `전년동기(${yoyCompareQuarter})`;
@@ -757,9 +907,24 @@ export default function FNFFXComprehensiveDashboard() {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-6">
       <div className="max-w-7xl mx-auto">
         {/* 헤더 */}
-        <div className="mb-6">
-          <h1 className="text-2xl font-bold text-slate-800">FNF 외환 종합 대시보드</h1>
-          <p className="text-slate-500 text-sm mt-1">외화 평가손익(미실현) + 거래손익(실현) 통합 분석 | {baseQuarter} 기준</p>
+        <div className="mb-6 flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-bold text-slate-800">FNF 외환 종합 대시보드</h1>
+            <p className="text-slate-500 text-sm mt-1">외화 평가손익(미실현) + 거래손익(실현) 통합 분석 | {baseQuarter} 기준</p>
+          </div>
+          {/* 기준분기 선택 드롭다운 */}
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-slate-500">기준분기:</span>
+            <select
+              value={baseQuarter}
+              onChange={(e) => setBaseQuarter(e.target.value as BaseQuarter)}
+              className="px-4 py-2 rounded-xl border border-slate-200 bg-white text-slate-700 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent cursor-pointer"
+            >
+              {AVAILABLE_QUARTERS.map((q) => (
+                <option key={q} value={q}>{q}</option>
+              ))}
+            </select>
+          </div>
         </div>
 
         {/* 탭 네비게이션 */}
@@ -828,8 +993,8 @@ export default function FNFFXComprehensiveDashboard() {
                 trend="good"
                 color="purple"
                 details={[
-                  { label: "채권 평가", value: currentQ.eval_recv_pl },
-                  { label: "채무 평가", value: currentQ.eval_payable_pl }
+                  { label: "채권 평가", value: currentQ.eval_recv_pl, yoyValue: compareQ.eval_recv_pl },
+                  { label: "채무 평가", value: currentQ.eval_payable_pl, yoyValue: compareQ.eval_payable_pl }
                 ]}
               />
               <EnhancedKPICard
@@ -843,8 +1008,8 @@ export default function FNFFXComprehensiveDashboard() {
                 trend="good"
                 color="green"
                 details={[
-                  { label: "채권 거래", value: currentQ.trade_recv_pl },
-                  { label: "채무 거래", value: currentQ.trade_payable_pl }
+                  { label: "채권 거래", value: currentQ.trade_recv_pl, yoyValue: compareQ.trade_recv_pl },
+                  { label: "채무 거래", value: currentQ.trade_payable_pl, yoyValue: compareQ.trade_payable_pl }
                 ]}
               />
               <ExchangeRateKPICard
@@ -912,6 +1077,7 @@ export default function FNFFXComprehensiveDashboard() {
               viewMode={viewMode}
               compareLabel={compareLabel}
               baseQuarter={baseQuarter}
+              scenarioAnalysis={scenarioAnalysis}
             />
 
             {/* 차트 섹션 */}
@@ -1047,6 +1213,15 @@ export default function FNFFXComprehensiveDashboard() {
                             : (currentBalanceData[`recv_${selectedCurrency}` as keyof typeof currentBalanceData] as number || 0).toFixed(0)
                           }억
                         </div>
+                        {/* YoY 비교 */}
+                        {selectedCurrency === 'ALL' && (
+                          <div className="text-[10px] text-slate-400 mt-1">
+                            전년동기: {compareQ.recv_balance.toLocaleString()}억
+                            <span className={`ml-1 ${calcYoY(currentQ.recv_balance, compareQ.recv_balance) >= 0 ? 'text-emerald-500' : 'text-red-400'}`}>
+                              (YoY {calcYoY(currentQ.recv_balance, compareQ.recv_balance) >= 0 ? '+' : ''}{calcYoY(currentQ.recv_balance, compareQ.recv_balance).toFixed(1)}%)
+                            </span>
+                          </div>
+                        )}
                         {/* 기말잔액 통화별 구분 (ALL일 때만) */}
                         {selectedCurrency === 'ALL' && (
                           <div className="mt-2 space-y-1">
@@ -1078,6 +1253,15 @@ export default function FNFFXComprehensiveDashboard() {
                             </>
                           )}
                         </div>
+                        {/* YoY 비교 */}
+                        {selectedCurrency === 'ALL' && (
+                          <div className="text-[10px] text-slate-400 mt-1">
+                            전년동기: {compareQ.eval_recv_pl >= 0 ? '+' : ''}{compareQ.eval_recv_pl.toFixed(1)}억
+                            <span className={`ml-1 ${calcYoY(currentQ.eval_recv_pl, compareQ.eval_recv_pl) >= 0 ? 'text-emerald-500' : 'text-red-400'}`}>
+                              (YoY {calcYoY(currentQ.eval_recv_pl, compareQ.eval_recv_pl) >= 0 ? '+' : ''}{calcYoY(currentQ.eval_recv_pl, compareQ.eval_recv_pl).toFixed(1)}%)
+                            </span>
+                          </div>
+                        )}
                         {/* 평가손익 통화별 구분 (ALL일 때만) */}
                         {selectedCurrency === 'ALL' && (
                           <div className="mt-2 space-y-1">
@@ -1116,10 +1300,33 @@ export default function FNFFXComprehensiveDashboard() {
                             : '-'
                           }
                         </div>
-                        {/* 수금금액 통화별 구분 - 통화별 데이터 없음 */}
+                        {/* YoY 비교 */}
                         {selectedCurrency === 'ALL' && (
-                          <div className="mt-2 text-[10px] text-slate-400 italic">
-                            통화별 데이터 미집계
+                          <div className="text-[10px] text-slate-400 mt-1">
+                            전년동기: {compareQ.settlement_recv.toLocaleString()}억
+                            <span className={`ml-1 ${calcYoY(currentQ.settlement_recv, compareQ.settlement_recv) >= 0 ? 'text-emerald-500' : 'text-red-400'}`}>
+                              (YoY {calcYoY(currentQ.settlement_recv, compareQ.settlement_recv) >= 0 ? '+' : ''}{calcYoY(currentQ.settlement_recv, compareQ.settlement_recv).toFixed(1)}%)
+                            </span>
+                          </div>
+                        )}
+                        {/* 수금금액 통화별 구분 */}
+                        {selectedCurrency === 'ALL' && (
+                          <div className="mt-2 space-y-1">
+                            {['CNY', 'HKD', 'USD', 'EUR'].map(ccy => {
+                              const settlement = (currencyRecvSettlement[currencyRecvSettlement.length - 1] as unknown as Record<string, number>)?.[ccy] || 0;
+                              if (settlement === 0) return null;
+                              return (
+                                <div key={ccy} className="flex items-center justify-between text-[10px]">
+                                  <div className="flex items-center gap-1">
+                                    <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: currencyColors[ccy] }}></div>
+                                    <span className="text-slate-500">{ccy}</span>
+                                  </div>
+                                  <span className="text-emerald-600">
+                                    {settlement.toLocaleString()}
+                                  </span>
+                                </div>
+                              );
+                            })}
                           </div>
                         )}
                       </div>
@@ -1135,6 +1342,15 @@ export default function FNFFXComprehensiveDashboard() {
                             </>
                           )}
                         </div>
+                        {/* YoY 비교 */}
+                        {selectedCurrency === 'ALL' && (
+                          <div className="text-[10px] text-slate-400 mt-1">
+                            전년동기: {compareQ.trade_recv_pl >= 0 ? '+' : ''}{compareQ.trade_recv_pl.toFixed(1)}억
+                            <span className={`ml-1 ${calcYoY(currentQ.trade_recv_pl, compareQ.trade_recv_pl) >= 0 ? 'text-emerald-500' : 'text-red-400'}`}>
+                              (YoY {calcYoY(currentQ.trade_recv_pl, compareQ.trade_recv_pl) >= 0 ? '+' : ''}{calcYoY(currentQ.trade_recv_pl, compareQ.trade_recv_pl).toFixed(1)}%)
+                            </span>
+                          </div>
+                        )}
                         {/* 거래손익 통화별 구분 (ALL일 때만) */}
                         {selectedCurrency === 'ALL' && (
                           <div className="mt-2 space-y-1">
@@ -1212,6 +1428,15 @@ export default function FNFFXComprehensiveDashboard() {
                             : Math.abs((currentBalanceData[`pay_${selectedCurrency}` as keyof typeof currentBalanceData] as number) || 0).toFixed(0)
                           }억
                         </div>
+                        {/* YoY 비교 */}
+                        {selectedCurrency === 'ALL' && (
+                          <div className="text-[10px] text-slate-400 mt-1">
+                            전년동기: {Math.abs(compareQ.payable_balance).toLocaleString()}억
+                            <span className={`ml-1 ${calcYoY(Math.abs(currentQ.payable_balance), Math.abs(compareQ.payable_balance)) >= 0 ? 'text-red-400' : 'text-emerald-500'}`}>
+                              (YoY {calcYoY(Math.abs(currentQ.payable_balance), Math.abs(compareQ.payable_balance)) >= 0 ? '+' : ''}{calcYoY(Math.abs(currentQ.payable_balance), Math.abs(compareQ.payable_balance)).toFixed(1)}%)
+                            </span>
+                          </div>
+                        )}
                         {/* 기말잔액 통화별 구분 (ALL일 때만) */}
                         {selectedCurrency === 'ALL' && (
                           <div className="mt-2 space-y-1">
@@ -1243,6 +1468,15 @@ export default function FNFFXComprehensiveDashboard() {
                             </>
                           )}
                         </div>
+                        {/* YoY 비교 */}
+                        {selectedCurrency === 'ALL' && (
+                          <div className="text-[10px] text-slate-400 mt-1">
+                            전년동기: {compareQ.eval_payable_pl >= 0 ? '+' : ''}{compareQ.eval_payable_pl.toFixed(1)}억
+                            <span className={`ml-1 ${calcYoY(currentQ.eval_payable_pl, compareQ.eval_payable_pl) >= 0 ? 'text-emerald-500' : 'text-red-400'}`}>
+                              (YoY {calcYoY(currentQ.eval_payable_pl, compareQ.eval_payable_pl) >= 0 ? '+' : ''}{calcYoY(currentQ.eval_payable_pl, compareQ.eval_payable_pl).toFixed(1)}%)
+                            </span>
+                          </div>
+                        )}
                         {/* 평가손익 통화별 구분 (ALL일 때만) */}
                         {selectedCurrency === 'ALL' && (
                           <div className="mt-2 space-y-1">
@@ -1281,10 +1515,33 @@ export default function FNFFXComprehensiveDashboard() {
                             : '-'
                           }
                         </div>
-                        {/* 결제금액 통화별 구분 - 통화별 데이터 없음 */}
+                        {/* YoY 비교 */}
                         {selectedCurrency === 'ALL' && (
-                          <div className="mt-2 text-[10px] text-slate-400 italic">
-                            통화별 데이터 미집계
+                          <div className="text-[10px] text-slate-400 mt-1">
+                            전년동기: {Math.abs(compareQ.settlement_payable).toLocaleString()}억
+                            <span className={`ml-1 ${calcYoY(Math.abs(currentQ.settlement_payable), Math.abs(compareQ.settlement_payable)) >= 0 ? 'text-red-400' : 'text-emerald-500'}`}>
+                              (YoY {calcYoY(Math.abs(currentQ.settlement_payable), Math.abs(compareQ.settlement_payable)) >= 0 ? '+' : ''}{calcYoY(Math.abs(currentQ.settlement_payable), Math.abs(compareQ.settlement_payable)).toFixed(1)}%)
+                            </span>
+                          </div>
+                        )}
+                        {/* 결제금액 통화별 구분 */}
+                        {selectedCurrency === 'ALL' && (
+                          <div className="mt-2 space-y-1">
+                            {['USD', 'EUR'].map(ccy => {
+                              const settlement = (currencyPaySettlement[currencyPaySettlement.length - 1] as unknown as Record<string, number>)?.[ccy] || 0;
+                              if (settlement === 0) return null;
+                              return (
+                                <div key={ccy} className="flex items-center justify-between text-[10px]">
+                                  <div className="flex items-center gap-1">
+                                    <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: currencyColors[ccy] }}></div>
+                                    <span className="text-slate-500">{ccy}</span>
+                                  </div>
+                                  <span className="text-orange-600">
+                                    {Math.abs(settlement).toLocaleString()}
+                                  </span>
+                                </div>
+                              );
+                            })}
                           </div>
                         )}
                       </div>
@@ -1299,6 +1556,15 @@ export default function FNFFXComprehensiveDashboard() {
                             <>0.0억</>
                           )}
                         </div>
+                        {/* YoY 비교 */}
+                        {selectedCurrency === 'ALL' && (
+                          <div className="text-[10px] text-slate-400 mt-1">
+                            전년동기: {compareQ.trade_payable_pl >= 0 ? '+' : ''}{compareQ.trade_payable_pl.toFixed(1)}억
+                            <span className={`ml-1 ${calcYoY(currentQ.trade_payable_pl, compareQ.trade_payable_pl) >= 0 ? 'text-emerald-500' : 'text-red-400'}`}>
+                              (YoY {calcYoY(currentQ.trade_payable_pl, compareQ.trade_payable_pl) >= 0 ? '+' : ''}{calcYoY(currentQ.trade_payable_pl, compareQ.trade_payable_pl).toFixed(1)}%)
+                            </span>
+                          </div>
+                        )}
                         {/* 거래손익 통화별 구분 (ALL일 때만) - 채무 거래손익 (99%가 USD) */}
                         {selectedCurrency === 'ALL' && (
                           <div className="mt-2 space-y-1">

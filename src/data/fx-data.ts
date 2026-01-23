@@ -168,7 +168,7 @@ interface SensitivityItem {
   hedgeRatio: number;
 }
 
-interface ScenarioItem {
+export interface ScenarioItem {
   scenario: string;
   description: string;
   USD: number;
@@ -205,6 +205,14 @@ interface ActionPlanItem {
   actions: string[];
 }
 
+interface InstitutionalForecast {
+  institution: string;
+  q1: number;
+  q2: number;
+  yearEnd: number;
+  trend: string;
+}
+
 interface AIInsight {
   lastUpdated: string;
   businessStructure: {
@@ -226,23 +234,26 @@ interface AIInsight {
   fxOutlook: {
     usd: {
       current: number;
-      forecast: string;
+      forecastRange: string;
       source: string;
       comment: string;
       impact: string;
+      institutionalForecasts: InstitutionalForecast[];
     };
     cny: {
       current: number;
-      forecast: string;
+      forecastRange: string;
       source: string;
       comment: string;
       impact: string;
+      institutionalForecasts: InstitutionalForecast[];
     };
     overall: {
       rating: string;
       comment: string;
       warning: string;
     };
+    lastUpdated?: string;
   };
   hedgeActions: {
     period: string;
