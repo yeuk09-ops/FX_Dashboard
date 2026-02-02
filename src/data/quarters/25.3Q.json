@@ -84,9 +84,9 @@
       "eval_recv_pl": -6.5,
       "eval_payable_pl": 0,
       "eval_net_pl": -6.5,
-      "trade_recv_pl": 0,
-      "trade_payable_pl": 0,
-      "trade_net_pl": 0,
+      "trade_recv_pl": 0.0,
+      "trade_payable_pl": 0.0,
+      "trade_net_pl": 0.0,
       "settlement_recv": 0,
       "settlement_payable": 0,
       "total_net_pl": -6.5
@@ -99,12 +99,12 @@
       "eval_recv_pl": 14.4,
       "eval_payable_pl": -3.6,
       "eval_net_pl": 10.8,
-      "trade_recv_pl": 24.7,
-      "trade_payable_pl": -21.1,
-      "trade_net_pl": 3.6,
+      "trade_recv_pl": 23.14,
+      "trade_payable_pl": -21.09,
+      "trade_net_pl": 2.05,
       "settlement_recv": 2089,
       "settlement_payable": -969,
-      "total_net_pl": 14.4
+      "total_net_pl": 11.85
     },
     {
       "quarter": "24.2Q",
@@ -114,12 +114,12 @@
       "eval_recv_pl": 10.3,
       "eval_payable_pl": -0.3,
       "eval_net_pl": 10.1,
-      "trade_recv_pl": -7.4,
-      "trade_payable_pl": 12.5,
-      "trade_net_pl": 5.1,
+      "trade_recv_pl": 15.56,
+      "trade_payable_pl": -8.68,
+      "trade_net_pl": 6.88,
       "settlement_recv": 778,
       "settlement_payable": -349,
-      "total_net_pl": 15.2
+      "total_net_pl": 17.09
     },
     {
       "quarter": "24.3Q",
@@ -129,12 +129,12 @@
       "eval_recv_pl": -21.4,
       "eval_payable_pl": 11.1,
       "eval_net_pl": -10.4,
-      "trade_recv_pl": -24.1,
-      "trade_payable_pl": 24.9,
-      "trade_net_pl": 0.8,
+      "trade_recv_pl": -6.73,
+      "trade_payable_pl": 16.29,
+      "trade_net_pl": 9.56,
       "settlement_recv": 2395,
       "settlement_payable": -959,
-      "total_net_pl": -9.6
+      "total_net_pl": -1.11
     },
     {
       "quarter": "24.4Q",
@@ -144,12 +144,12 @@
       "eval_recv_pl": 45.5,
       "eval_payable_pl": -25.4,
       "eval_net_pl": 20.1,
-      "trade_recv_pl": 48.5,
-      "trade_payable_pl": -37.0,
-      "trade_net_pl": 11.5,
+      "trade_recv_pl": 40.71,
+      "trade_payable_pl": -20.71,
+      "trade_net_pl": 20.0,
       "settlement_recv": 1284,
       "settlement_payable": -706,
-      "total_net_pl": 31.6
+      "total_net_pl": 40.75
     },
     {
       "quarter": "25.1Q",
@@ -159,12 +159,12 @@
       "eval_recv_pl": 2.68,
       "eval_payable_pl": -4.43,
       "eval_net_pl": -1.75,
-      "trade_recv_pl": -17.8,
-      "trade_payable_pl": -12.7,
-      "trade_net_pl": -30.4,
+      "trade_recv_pl": -19.12,
+      "trade_payable_pl": -12.66,
+      "trade_net_pl": -31.78,
       "settlement_recv": 2296,
       "settlement_payable": -1079,
-      "total_net_pl": -32.15
+      "total_net_pl": -33.54
     },
     {
       "quarter": "25.2Q",
@@ -174,12 +174,12 @@
       "eval_recv_pl": -34.95,
       "eval_payable_pl": 9.18,
       "eval_net_pl": -25.77,
-      "trade_recv_pl": 1.7,
-      "trade_payable_pl": 26.8,
-      "trade_net_pl": 28.5,
+      "trade_recv_pl": -18.52,
+      "trade_payable_pl": 14.12,
+      "trade_net_pl": -4.4,
       "settlement_recv": 1118,
       "settlement_payable": -586,
-      "total_net_pl": 2.73
+      "total_net_pl": -30.16
     },
     {
       "quarter": "25.3Q",
@@ -189,12 +189,12 @@
       "eval_recv_pl": 28.13,
       "eval_payable_pl": -10.47,
       "eval_net_pl": 17.66,
-      "trade_recv_pl": 58.1,
-      "trade_payable_pl": -23.7,
-      "trade_net_pl": 34.3,
+      "trade_recv_pl": 40.85,
+      "trade_payable_pl": -9.55,
+      "trade_net_pl": 31.3,
       "settlement_recv": 3012,
       "settlement_payable": -1266,
-      "total_net_pl": 51.96
+      "total_net_pl": 48.97
     }
   ],
   "cumulativeData": [
@@ -206,9 +206,9 @@
       "eval_recv_pl": -6.5,
       "eval_payable_pl": 0,
       "eval_net_pl": -6.5,
-      "trade_recv_pl": 0,
-      "trade_payable_pl": 0,
-      "trade_net_pl": 0,
+      "trade_recv_pl": 0.0,
+      "trade_payable_pl": 0.0,
+      "trade_net_pl": 0.0,
       "settlement_recv": 0,
       "settlement_payable": 0,
       "total_net_pl": -6.5
@@ -221,12 +221,12 @@
       "eval_recv_pl": 14.4,
       "eval_payable_pl": -3.6,
       "eval_net_pl": 10.8,
-      "trade_recv_pl": 24.7,
+      "trade_recv_pl": 23.15,
       "trade_payable_pl": -21.1,
-      "trade_net_pl": 3.6,
+      "trade_net_pl": 2.05,
       "settlement_recv": 2089,
       "settlement_payable": -969,
-      "total_net_pl": 14.4
+      "total_net_pl": 11.85
     },
     {
       "quarter": "24.2Q",
@@ -236,12 +236,12 @@
       "eval_recv_pl": 24.7,
       "eval_payable_pl": -3.9,
       "eval_net_pl": 20.9,
-      "trade_recv_pl": 17.3,
-      "trade_payable_pl": -8.6,
-      "trade_net_pl": 8.7,
+      "trade_recv_pl": 38.7,
+      "trade_payable_pl": -29.78,
+      "trade_net_pl": 8.92,
       "settlement_recv": 2867,
       "settlement_payable": -1318,
-      "total_net_pl": 29.6
+      "total_net_pl": 28.93
     },
     {
       "quarter": "24.3Q",
@@ -251,12 +251,12 @@
       "eval_recv_pl": 3.3,
       "eval_payable_pl": 7.2,
       "eval_net_pl": 10.5,
-      "trade_recv_pl": -6.8,
-      "trade_payable_pl": 16.3,
-      "trade_net_pl": 9.5,
+      "trade_recv_pl": 31.96,
+      "trade_payable_pl": -13.47,
+      "trade_net_pl": 18.49,
       "settlement_recv": 5262,
       "settlement_payable": -2277,
-      "total_net_pl": 20.0
+      "total_net_pl": 27.83
     },
     {
       "quarter": "24.4Q",
@@ -266,12 +266,12 @@
       "eval_recv_pl": 48.8,
       "eval_payable_pl": -18.2,
       "eval_net_pl": 30.6,
-      "trade_recv_pl": 41.7,
-      "trade_payable_pl": -20.7,
-      "trade_net_pl": 21.0,
+      "trade_recv_pl": 72.67,
+      "trade_payable_pl": -34.17,
+      "trade_net_pl": 38.5,
       "settlement_recv": 6546,
       "settlement_payable": -2983,
-      "total_net_pl": 51.6
+      "total_net_pl": 68.59
     },
     {
       "quarter": "25.1Q",
@@ -281,12 +281,12 @@
       "eval_recv_pl": 2.68,
       "eval_payable_pl": -4.43,
       "eval_net_pl": -1.75,
-      "trade_recv_pl": -17.8,
-      "trade_payable_pl": -12.7,
-      "trade_net_pl": -30.4,
+      "trade_recv_pl": -19.12,
+      "trade_payable_pl": -12.66,
+      "trade_net_pl": -31.78,
       "settlement_recv": 2296,
       "settlement_payable": -1079,
-      "total_net_pl": -32.15
+      "total_net_pl": -33.54
     },
     {
       "quarter": "25.2Q",
@@ -296,12 +296,12 @@
       "eval_recv_pl": -32.27,
       "eval_payable_pl": 4.75,
       "eval_net_pl": -27.52,
-      "trade_recv_pl": -16.1,
-      "trade_payable_pl": 14.1,
-      "trade_net_pl": -1.9,
+      "trade_recv_pl": -37.65,
+      "trade_payable_pl": 1.44,
+      "trade_net_pl": -36.21,
       "settlement_recv": 3414,
       "settlement_payable": -1665,
-      "total_net_pl": -29.42
+      "total_net_pl": -63.73
     },
     {
       "quarter": "25.3Q",
@@ -311,12 +311,12 @@
       "eval_recv_pl": -4.14,
       "eval_payable_pl": -5.72,
       "eval_net_pl": -9.86,
-      "trade_recv_pl": 42.0,
-      "trade_payable_pl": -9.6,
-      "trade_net_pl": 32.4,
+      "trade_recv_pl": 3.22,
+      "trade_payable_pl": -8.11,
+      "trade_net_pl": -4.89,
       "settlement_recv": 6426,
       "settlement_payable": -2931,
-      "total_net_pl": 22.54
+      "total_net_pl": -14.74
     }
   ],
   "currencyRecvEvalPL_Quarterly": [
@@ -970,22 +970,92 @@
     }
   ],
   "currencyPayTradePL_Quarterly": [
-    {"quarter": "24.1Q", "USD": -20.93, "EUR": -0.16, "CNY": 0.0},
-    {"quarter": "24.2Q", "USD": -8.68, "EUR": -0.04, "CNY": 0.04},
-    {"quarter": "24.3Q", "USD": 20.78, "EUR": 0.0, "CNY": -4.52},
-    {"quarter": "24.4Q", "USD": -20.06, "EUR": 0.01, "CNY": -0.65},
-    {"quarter": "25.1Q", "USD": -13.2, "EUR": 0.51, "CNY": 0.0},
-    {"quarter": "25.2Q", "USD": 14.1, "EUR": 0.0, "CNY": 0.0},
-    {"quarter": "25.3Q", "USD": -9.53, "EUR": -0.01, "CNY": 0.0}
+    {
+      "quarter": "24.1Q",
+      "USD": -20.93,
+      "EUR": -0.16,
+      "CNY": 0.0
+    },
+    {
+      "quarter": "24.2Q",
+      "USD": -8.68,
+      "EUR": -0.04,
+      "CNY": 0.04
+    },
+    {
+      "quarter": "24.3Q",
+      "USD": 20.78,
+      "EUR": 0.0,
+      "CNY": -4.52
+    },
+    {
+      "quarter": "24.4Q",
+      "USD": -20.06,
+      "EUR": 0.01,
+      "CNY": -0.65
+    },
+    {
+      "quarter": "25.1Q",
+      "USD": -13.2,
+      "EUR": 0.51,
+      "CNY": 0.0
+    },
+    {
+      "quarter": "25.2Q",
+      "USD": 14.1,
+      "EUR": 0.0,
+      "CNY": 0.0
+    },
+    {
+      "quarter": "25.3Q",
+      "USD": -9.53,
+      "EUR": -0.01,
+      "CNY": 0.0
+    }
   ],
   "currencyPayTradePL_Cumulative": [
-    {"quarter": "24.1Q", "USD": -20.93, "EUR": -0.17, "CNY": 0.0},
-    {"quarter": "24.2Q", "USD": -29.61, "EUR": -0.21, "CNY": 0.04},
-    {"quarter": "24.3Q", "USD": -8.82, "EUR": -0.2, "CNY": -4.48},
-    {"quarter": "24.4Q", "USD": -28.87, "EUR": -0.19, "CNY": -5.13},
-    {"quarter": "25.1Q", "USD": -13.2, "EUR": 0.51, "CNY": 0.0},
-    {"quarter": "25.2Q", "USD": 0.89, "EUR": 0.5, "CNY": 0.0},
-    {"quarter": "25.3Q", "USD": -8.64, "EUR": 0.49, "CNY": 0.0}
+    {
+      "quarter": "24.1Q",
+      "USD": -20.93,
+      "EUR": -0.17,
+      "CNY": 0.0
+    },
+    {
+      "quarter": "24.2Q",
+      "USD": -29.61,
+      "EUR": -0.21,
+      "CNY": 0.04
+    },
+    {
+      "quarter": "24.3Q",
+      "USD": -8.82,
+      "EUR": -0.2,
+      "CNY": -4.48
+    },
+    {
+      "quarter": "24.4Q",
+      "USD": -28.87,
+      "EUR": -0.19,
+      "CNY": -5.13
+    },
+    {
+      "quarter": "25.1Q",
+      "USD": -13.2,
+      "EUR": 0.51,
+      "CNY": 0.0
+    },
+    {
+      "quarter": "25.2Q",
+      "USD": 0.89,
+      "EUR": 0.5,
+      "CNY": 0.0
+    },
+    {
+      "quarter": "25.3Q",
+      "USD": -8.64,
+      "EUR": 0.49,
+      "CNY": 0.0
+    }
   ],
   "volatilityData": {
     "USD": {
@@ -1241,8 +1311,20 @@
         "comment": "KB: 연말 1,300원 하회 전망, BofA: 2026년 하반기 1,395원",
         "impact": "F&F: USD 채무 평가손실 축소 예상",
         "institutionalForecasts": [
-          {"institution": "KB증권", "q1": 1380, "q2": 1350, "yearEnd": 1300, "trend": "down"},
-          {"institution": "BofA", "q1": 1400, "q2": 1395, "yearEnd": 1395, "trend": "stable"}
+          {
+            "institution": "KB증권",
+            "q1": 1380,
+            "q2": 1350,
+            "yearEnd": 1300,
+            "trend": "down"
+          },
+          {
+            "institution": "BofA",
+            "q1": 1400,
+            "q2": 1395,
+            "yearEnd": 1395,
+            "trend": "stable"
+          }
         ]
       },
       "cny": {
@@ -1252,7 +1334,13 @@
         "comment": "위안화 강세 기조 지속 전망, 2025년 12월 7선 돌파 후 안정",
         "impact": "F&F: CNY 채권 1,154억 평가이익 지속",
         "institutionalForecasts": [
-          {"institution": "주요기관 컨센서스", "q1": 200, "q2": 205, "yearEnd": 210, "trend": "up"}
+          {
+            "institution": "주요기관 컨센서스",
+            "q1": 200,
+            "q2": 205,
+            "yearEnd": 210,
+            "trend": "up"
+          }
         ]
       },
       "overall": {
