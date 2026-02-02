@@ -1225,14 +1225,22 @@ export default function FNFFXComprehensiveDashboard() {
                           }억
                         </div>
                         {/* YoY 비교 */}
-                        {selectedCurrency === 'ALL' && (
-                          <div className="text-[10px] text-slate-400 mt-1">
-                            전년동기: {compareQ.recv_balance.toLocaleString()}억
-                            <span className={`ml-1 ${calcYoY(currentQ.recv_balance, compareQ.recv_balance) >= 0 ? 'text-emerald-500' : 'text-red-400'}`}>
-                              (YoY {calcYoY(currentQ.recv_balance, compareQ.recv_balance) >= 0 ? '+' : ''}{calcYoY(currentQ.recv_balance, compareQ.recv_balance).toFixed(1)}%)
-                            </span>
-                          </div>
-                        )}
+                        {(() => {
+                          const currentVal = selectedCurrency === 'ALL'
+                            ? currentQ.recv_balance
+                            : ((currentBalanceData[`recv_${selectedCurrency}` as keyof typeof currentBalanceData] as number) || 0);
+                          const compareVal = selectedCurrency === 'ALL'
+                            ? compareQ.recv_balance
+                            : ((currencyBalanceData.find(d => d.quarter === yoyCompareQuarter)?.[`recv_${selectedCurrency}` as keyof typeof currentBalanceData] as number) || 0);
+                          return (
+                            <div className="text-[10px] text-slate-400 mt-1">
+                              전년동기: {typeof compareVal === 'number' && compareVal % 1 !== 0 ? compareVal.toFixed(0) : compareVal.toLocaleString()}억
+                              <span className={`ml-1 ${calcYoY(currentVal, compareVal) >= 0 ? 'text-emerald-500' : 'text-red-400'}`}>
+                                (YoY {calcYoY(currentVal, compareVal) >= 0 ? '+' : ''}{calcYoY(currentVal, compareVal).toFixed(1)}%)
+                              </span>
+                            </div>
+                          );
+                        })()}
                         {/* 기말잔액 통화별 구분 (ALL일 때만) */}
                         {selectedCurrency === 'ALL' && (
                           <div className="mt-2 space-y-1">
@@ -1265,14 +1273,22 @@ export default function FNFFXComprehensiveDashboard() {
                           )}
                         </div>
                         {/* YoY 비교 */}
-                        {selectedCurrency === 'ALL' && (
-                          <div className="text-[10px] text-slate-400 mt-1">
-                            전년동기: {compareQ.eval_recv_pl >= 0 ? '+' : ''}{compareQ.eval_recv_pl.toFixed(1)}억
-                            <span className={`ml-1 ${calcYoY(currentQ.eval_recv_pl, compareQ.eval_recv_pl) >= 0 ? 'text-emerald-500' : 'text-red-400'}`}>
-                              (YoY {calcYoY(currentQ.eval_recv_pl, compareQ.eval_recv_pl) >= 0 ? '+' : ''}{calcYoY(currentQ.eval_recv_pl, compareQ.eval_recv_pl).toFixed(1)}%)
-                            </span>
-                          </div>
-                        )}
+                        {(() => {
+                          const currentVal = selectedCurrency === 'ALL'
+                            ? currentQ.eval_recv_pl
+                            : ((currencyRecvEvalPL[currencyRecvEvalPL.length - 1] as unknown as Record<string, number>)?.[selectedCurrency] || 0);
+                          const compareVal = selectedCurrency === 'ALL'
+                            ? compareQ.eval_recv_pl
+                            : ((currencyRecvEvalPL.find(d => (d as unknown as Record<string, string>).quarter === yoyCompareQuarter) as unknown as Record<string, number>)?.[selectedCurrency] || 0);
+                          return (
+                            <div className="text-[10px] text-slate-400 mt-1">
+                              전년동기: {compareVal >= 0 ? '+' : ''}{compareVal.toFixed(1)}억
+                              <span className={`ml-1 ${calcYoY(currentVal, compareVal) >= 0 ? 'text-emerald-500' : 'text-red-400'}`}>
+                                (YoY {calcYoY(currentVal, compareVal) >= 0 ? '+' : ''}{calcYoY(currentVal, compareVal).toFixed(1)}%)
+                              </span>
+                            </div>
+                          );
+                        })()}
                         {/* 평가손익 통화별 구분 (ALL일 때만) */}
                         {selectedCurrency === 'ALL' && (
                           <div className="mt-2 space-y-1">
@@ -1312,14 +1328,22 @@ export default function FNFFXComprehensiveDashboard() {
                           }
                         </div>
                         {/* YoY 비교 */}
-                        {selectedCurrency === 'ALL' && (
-                          <div className="text-[10px] text-slate-400 mt-1">
-                            전년동기: {compareQ.settlement_recv.toLocaleString()}억
-                            <span className={`ml-1 ${calcYoY(currentQ.settlement_recv, compareQ.settlement_recv) >= 0 ? 'text-emerald-500' : 'text-red-400'}`}>
-                              (YoY {calcYoY(currentQ.settlement_recv, compareQ.settlement_recv) >= 0 ? '+' : ''}{calcYoY(currentQ.settlement_recv, compareQ.settlement_recv).toFixed(1)}%)
-                            </span>
-                          </div>
-                        )}
+                        {(() => {
+                          const currentVal = selectedCurrency === 'ALL'
+                            ? currentQ.settlement_recv
+                            : ((currencyRecvSettlement[currencyRecvSettlement.length - 1] as unknown as Record<string, number>)?.[selectedCurrency] || 0);
+                          const compareVal = selectedCurrency === 'ALL'
+                            ? compareQ.settlement_recv
+                            : ((currencyRecvSettlement.find(d => (d as unknown as Record<string, string>).quarter === yoyCompareQuarter) as unknown as Record<string, number>)?.[selectedCurrency] || 0);
+                          return (
+                            <div className="text-[10px] text-slate-400 mt-1">
+                              전년동기: {compareVal.toLocaleString()}억
+                              <span className={`ml-1 ${calcYoY(currentVal, compareVal) >= 0 ? 'text-emerald-500' : 'text-red-400'}`}>
+                                (YoY {calcYoY(currentVal, compareVal) >= 0 ? '+' : ''}{calcYoY(currentVal, compareVal).toFixed(1)}%)
+                              </span>
+                            </div>
+                          );
+                        })()}
                         {/* 수금금액 통화별 구분 */}
                         {selectedCurrency === 'ALL' && (
                           <div className="mt-2 space-y-1">
@@ -1354,14 +1378,22 @@ export default function FNFFXComprehensiveDashboard() {
                           )}
                         </div>
                         {/* YoY 비교 */}
-                        {selectedCurrency === 'ALL' && (
-                          <div className="text-[10px] text-slate-400 mt-1">
-                            전년동기: {compareQ.trade_recv_pl >= 0 ? '+' : ''}{compareQ.trade_recv_pl.toFixed(1)}억
-                            <span className={`ml-1 ${calcYoY(currentQ.trade_recv_pl, compareQ.trade_recv_pl) >= 0 ? 'text-emerald-500' : 'text-red-400'}`}>
-                              (YoY {calcYoY(currentQ.trade_recv_pl, compareQ.trade_recv_pl) >= 0 ? '+' : ''}{calcYoY(currentQ.trade_recv_pl, compareQ.trade_recv_pl).toFixed(1)}%)
-                            </span>
-                          </div>
-                        )}
+                        {(() => {
+                          const currentVal = selectedCurrency === 'ALL'
+                            ? currentQ.trade_recv_pl
+                            : ((currencyTradePL[currencyTradePL.length - 1] as unknown as Record<string, number>)?.[selectedCurrency] || 0);
+                          const compareVal = selectedCurrency === 'ALL'
+                            ? compareQ.trade_recv_pl
+                            : ((currencyTradePL.find(d => (d as unknown as Record<string, string>).quarter === yoyCompareQuarter) as unknown as Record<string, number>)?.[selectedCurrency] || 0);
+                          return (
+                            <div className="text-[10px] text-slate-400 mt-1">
+                              전년동기: {compareVal >= 0 ? '+' : ''}{compareVal.toFixed(1)}억
+                              <span className={`ml-1 ${calcYoY(currentVal, compareVal) >= 0 ? 'text-emerald-500' : 'text-red-400'}`}>
+                                (YoY {calcYoY(currentVal, compareVal) >= 0 ? '+' : ''}{calcYoY(currentVal, compareVal).toFixed(1)}%)
+                              </span>
+                            </div>
+                          );
+                        })()}
                         {/* 거래손익 통화별 구분 (ALL일 때만) */}
                         {selectedCurrency === 'ALL' && (
                           <div className="mt-2 space-y-1">
@@ -1440,14 +1472,22 @@ export default function FNFFXComprehensiveDashboard() {
                           }억
                         </div>
                         {/* YoY 비교 */}
-                        {selectedCurrency === 'ALL' && (
-                          <div className="text-[10px] text-slate-400 mt-1">
-                            전년동기: {Math.abs(compareQ.payable_balance).toLocaleString()}억
-                            <span className={`ml-1 ${calcYoY(Math.abs(currentQ.payable_balance), Math.abs(compareQ.payable_balance)) >= 0 ? 'text-red-400' : 'text-emerald-500'}`}>
-                              (YoY {calcYoY(Math.abs(currentQ.payable_balance), Math.abs(compareQ.payable_balance)) >= 0 ? '+' : ''}{calcYoY(Math.abs(currentQ.payable_balance), Math.abs(compareQ.payable_balance)).toFixed(1)}%)
-                            </span>
-                          </div>
-                        )}
+                        {(() => {
+                          const currentVal = selectedCurrency === 'ALL'
+                            ? Math.abs(currentQ.payable_balance)
+                            : Math.abs((currentBalanceData[`pay_${selectedCurrency}` as keyof typeof currentBalanceData] as number) || 0);
+                          const compareVal = selectedCurrency === 'ALL'
+                            ? Math.abs(compareQ.payable_balance)
+                            : Math.abs((currencyBalanceData.find(d => d.quarter === yoyCompareQuarter)?.[`pay_${selectedCurrency}` as keyof typeof currentBalanceData] as number) || 0);
+                          return (
+                            <div className="text-[10px] text-slate-400 mt-1">
+                              전년동기: {typeof compareVal === 'number' && compareVal % 1 !== 0 ? compareVal.toFixed(0) : compareVal.toLocaleString()}억
+                              <span className={`ml-1 ${calcYoY(currentVal, compareVal) >= 0 ? 'text-red-400' : 'text-emerald-500'}`}>
+                                (YoY {calcYoY(currentVal, compareVal) >= 0 ? '+' : ''}{calcYoY(currentVal, compareVal).toFixed(1)}%)
+                              </span>
+                            </div>
+                          );
+                        })()}
                         {/* 기말잔액 통화별 구분 (ALL일 때만) */}
                         {selectedCurrency === 'ALL' && (
                           <div className="mt-2 space-y-1">
@@ -1480,14 +1520,22 @@ export default function FNFFXComprehensiveDashboard() {
                           )}
                         </div>
                         {/* YoY 비교 */}
-                        {selectedCurrency === 'ALL' && (
-                          <div className="text-[10px] text-slate-400 mt-1">
-                            전년동기: {compareQ.eval_payable_pl >= 0 ? '+' : ''}{compareQ.eval_payable_pl.toFixed(1)}억
-                            <span className={`ml-1 ${calcYoY(currentQ.eval_payable_pl, compareQ.eval_payable_pl) >= 0 ? 'text-emerald-500' : 'text-red-400'}`}>
-                              (YoY {calcYoY(currentQ.eval_payable_pl, compareQ.eval_payable_pl) >= 0 ? '+' : ''}{calcYoY(currentQ.eval_payable_pl, compareQ.eval_payable_pl).toFixed(1)}%)
-                            </span>
-                          </div>
-                        )}
+                        {(() => {
+                          const currentVal = selectedCurrency === 'ALL'
+                            ? currentQ.eval_payable_pl
+                            : ((currencyPayableEvalPL[currencyPayableEvalPL.length - 1] as unknown as Record<string, number>)?.[selectedCurrency] || 0);
+                          const compareVal = selectedCurrency === 'ALL'
+                            ? compareQ.eval_payable_pl
+                            : ((currencyPayableEvalPL.find(d => (d as unknown as Record<string, string>).quarter === yoyCompareQuarter) as unknown as Record<string, number>)?.[selectedCurrency] || 0);
+                          return (
+                            <div className="text-[10px] text-slate-400 mt-1">
+                              전년동기: {compareVal >= 0 ? '+' : ''}{compareVal.toFixed(1)}억
+                              <span className={`ml-1 ${calcYoY(currentVal, compareVal) >= 0 ? 'text-emerald-500' : 'text-red-400'}`}>
+                                (YoY {calcYoY(currentVal, compareVal) >= 0 ? '+' : ''}{calcYoY(currentVal, compareVal).toFixed(1)}%)
+                              </span>
+                            </div>
+                          );
+                        })()}
                         {/* 평가손익 통화별 구분 (ALL일 때만) */}
                         {selectedCurrency === 'ALL' && (
                           <div className="mt-2 space-y-1">
@@ -1527,14 +1575,22 @@ export default function FNFFXComprehensiveDashboard() {
                           }
                         </div>
                         {/* YoY 비교 */}
-                        {selectedCurrency === 'ALL' && (
-                          <div className="text-[10px] text-slate-400 mt-1">
-                            전년동기: {Math.abs(compareQ.settlement_payable).toLocaleString()}억
-                            <span className={`ml-1 ${calcYoY(Math.abs(currentQ.settlement_payable), Math.abs(compareQ.settlement_payable)) >= 0 ? 'text-red-400' : 'text-emerald-500'}`}>
-                              (YoY {calcYoY(Math.abs(currentQ.settlement_payable), Math.abs(compareQ.settlement_payable)) >= 0 ? '+' : ''}{calcYoY(Math.abs(currentQ.settlement_payable), Math.abs(compareQ.settlement_payable)).toFixed(1)}%)
-                            </span>
-                          </div>
-                        )}
+                        {(() => {
+                          const currentVal = selectedCurrency === 'ALL'
+                            ? Math.abs(currentQ.settlement_payable)
+                            : Math.abs((currencyPaySettlement[currencyPaySettlement.length - 1] as unknown as Record<string, number>)?.[selectedCurrency] || 0);
+                          const compareVal = selectedCurrency === 'ALL'
+                            ? Math.abs(compareQ.settlement_payable)
+                            : Math.abs((currencyPaySettlement.find(d => (d as unknown as Record<string, string>).quarter === yoyCompareQuarter) as unknown as Record<string, number>)?.[selectedCurrency] || 0);
+                          return (
+                            <div className="text-[10px] text-slate-400 mt-1">
+                              전년동기: {compareVal.toLocaleString()}억
+                              <span className={`ml-1 ${calcYoY(currentVal, compareVal) >= 0 ? 'text-red-400' : 'text-emerald-500'}`}>
+                                (YoY {calcYoY(currentVal, compareVal) >= 0 ? '+' : ''}{calcYoY(currentVal, compareVal).toFixed(1)}%)
+                              </span>
+                            </div>
+                          );
+                        })()}
                         {/* 결제금액 통화별 구분 */}
                         {selectedCurrency === 'ALL' && (
                           <div className="mt-2 space-y-1">
@@ -1572,14 +1628,22 @@ export default function FNFFXComprehensiveDashboard() {
                           })()}
                         </div>
                         {/* YoY 비교 */}
-                        {selectedCurrency === 'ALL' && (
-                          <div className="text-[10px] text-slate-400 mt-1">
-                            전년동기: {compareQ.trade_payable_pl >= 0 ? '+' : ''}{compareQ.trade_payable_pl.toFixed(1)}억
-                            <span className={`ml-1 ${calcYoY(currentQ.trade_payable_pl, compareQ.trade_payable_pl) >= 0 ? 'text-emerald-500' : 'text-red-400'}`}>
-                              (YoY {calcYoY(currentQ.trade_payable_pl, compareQ.trade_payable_pl) >= 0 ? '+' : ''}{calcYoY(currentQ.trade_payable_pl, compareQ.trade_payable_pl).toFixed(1)}%)
-                            </span>
-                          </div>
-                        )}
+                        {(() => {
+                          const currentVal = selectedCurrency === 'ALL'
+                            ? currentQ.trade_payable_pl
+                            : ((currencyPayTradePL[currencyPayTradePL.length - 1] as unknown as Record<string, number>)?.[selectedCurrency] || 0);
+                          const compareVal = selectedCurrency === 'ALL'
+                            ? compareQ.trade_payable_pl
+                            : ((currencyPayTradePL.find(d => (d as unknown as Record<string, string>).quarter === yoyCompareQuarter) as unknown as Record<string, number>)?.[selectedCurrency] || 0);
+                          return (
+                            <div className="text-[10px] text-slate-400 mt-1">
+                              전년동기: {compareVal >= 0 ? '+' : ''}{compareVal.toFixed(1)}억
+                              <span className={`ml-1 ${calcYoY(currentVal, compareVal) >= 0 ? 'text-emerald-500' : 'text-red-400'}`}>
+                                (YoY {calcYoY(currentVal, compareVal) >= 0 ? '+' : ''}{calcYoY(currentVal, compareVal).toFixed(1)}%)
+                              </span>
+                            </div>
+                          );
+                        })()}
                         {/* 거래손익 통화별 구분 (ALL일 때만) - 채무 거래손익 */}
                         {selectedCurrency === 'ALL' && (
                           <div className="mt-2 space-y-1">
