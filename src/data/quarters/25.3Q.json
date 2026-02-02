@@ -969,6 +969,24 @@
       "CNY": 0
     }
   ],
+  "currencyPayTradePL_Quarterly": [
+    {"quarter": "24.1Q", "USD": -20.93, "EUR": -0.16, "CNY": 0.0},
+    {"quarter": "24.2Q", "USD": -8.68, "EUR": -0.04, "CNY": 0.04},
+    {"quarter": "24.3Q", "USD": 20.78, "EUR": 0.0, "CNY": -4.52},
+    {"quarter": "24.4Q", "USD": -20.06, "EUR": 0.01, "CNY": -0.65},
+    {"quarter": "25.1Q", "USD": -13.2, "EUR": 0.51, "CNY": 0.0},
+    {"quarter": "25.2Q", "USD": 14.1, "EUR": 0.0, "CNY": 0.0},
+    {"quarter": "25.3Q", "USD": -9.53, "EUR": -0.01, "CNY": 0.0}
+  ],
+  "currencyPayTradePL_Cumulative": [
+    {"quarter": "24.1Q", "USD": -20.93, "EUR": -0.17, "CNY": 0.0},
+    {"quarter": "24.2Q", "USD": -29.61, "EUR": -0.21, "CNY": 0.04},
+    {"quarter": "24.3Q", "USD": -8.82, "EUR": -0.2, "CNY": -4.48},
+    {"quarter": "24.4Q", "USD": -28.87, "EUR": -0.19, "CNY": -5.13},
+    {"quarter": "25.1Q", "USD": -13.2, "EUR": 0.51, "CNY": 0.0},
+    {"quarter": "25.2Q", "USD": 0.89, "EUR": 0.5, "CNY": 0.0},
+    {"quarter": "25.3Q", "USD": -8.64, "EUR": 0.49, "CNY": 0.0}
+  ],
   "volatilityData": {
     "USD": {
       "stdDev": 58.2,

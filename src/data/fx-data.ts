@@ -36,6 +36,8 @@ interface QuarterData {
   currencyRecvSettlement_Cumulative: CurrencySettlementItem[];
   currencyPaySettlement_Quarterly: CurrencyPaySettlementItem[];
   currencyPaySettlement_Cumulative: CurrencyPaySettlementItem[];
+  currencyPayTradePL_Quarterly: CurrencyPayTradePLItem[];
+  currencyPayTradePL_Cumulative: CurrencyPayTradePLItem[];
   volatilityData: VolatilityData;
   sensitivityAnalysis: SensitivityItem[];
   scenarioAnalysis: ScenarioItem[];
@@ -142,6 +144,13 @@ interface CurrencySettlementItem {
 }
 
 interface CurrencyPaySettlementItem {
+  quarter: string;
+  USD: number;
+  EUR: number;
+  CNY: number;
+}
+
+interface CurrencyPayTradePLItem {
   quarter: string;
   USD: number;
   EUR: number;
@@ -294,6 +303,8 @@ export const currencyRecvSettlement_Quarterly = defaultData.currencyRecvSettleme
 export const currencyRecvSettlement_Cumulative = defaultData.currencyRecvSettlement_Cumulative;
 export const currencyPaySettlement_Quarterly = defaultData.currencyPaySettlement_Quarterly;
 export const currencyPaySettlement_Cumulative = defaultData.currencyPaySettlement_Cumulative;
+export const currencyPayTradePL_Quarterly = defaultData.currencyPayTradePL_Quarterly;
+export const currencyPayTradePL_Cumulative = defaultData.currencyPayTradePL_Cumulative;
 export const volatilityData = defaultData.volatilityData;
 export const sensitivityAnalysis = defaultData.sensitivityAnalysis;
 export const scenarioAnalysis = defaultData.scenarioAnalysis;

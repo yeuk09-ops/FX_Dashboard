@@ -736,6 +736,8 @@ export default function FNFFXComprehensiveDashboard() {
   const currencyRecvSettlement_Cumulative = quarterData.currencyRecvSettlement_Cumulative;
   const currencyPaySettlement_Quarterly = quarterData.currencyPaySettlement_Quarterly;
   const currencyPaySettlement_Cumulative = quarterData.currencyPaySettlement_Cumulative;
+  const currencyPayTradePL_Quarterly = quarterData.currencyPayTradePL_Quarterly;
+  const currencyPayTradePL_Cumulative = quarterData.currencyPayTradePL_Cumulative;
   const sensitivityAnalysis = quarterData.sensitivityAnalysis;
   const scenarioAnalysis = quarterData.scenarioAnalysis;
   const riskIndicators = quarterData.riskIndicators;
@@ -770,6 +772,10 @@ export default function FNFFXComprehensiveDashboard() {
   const currencyPaySettlement = useMemo(() => {
     return viewMode === 'quarterly' ? currencyPaySettlement_Quarterly : currencyPaySettlement_Cumulative;
   }, [viewMode, currencyPaySettlement_Quarterly, currencyPaySettlement_Cumulative]);
+
+  const currencyPayTradePL = useMemo(() => {
+    return viewMode === 'quarterly' ? currencyPayTradePL_Quarterly : currencyPayTradePL_Cumulative;
+  }, [viewMode, currencyPayTradePL_Quarterly, currencyPayTradePL_Cumulative]);
 
   // 현재 분기 및 비교 데이터
   const currentQ = dataSource[dataSource.length - 1];
@@ -869,6 +875,8 @@ export default function FNFFXComprehensiveDashboard() {
         const recvEval = recvEvalData?.[selectedCurrency] || 0;
         const payableEval = payableEvalData?.[selectedCurrency] || 0;
         const trade = tradeData?.[selectedCurrency] || 0;
+        const payTradeData = currencyPayTradePL[idx] as unknown as Record<string, number>;
+        const payTrade = payTradeData?.[selectedCurrency] || 0;
 
         return {
           quarter: item.quarter,
@@ -876,32 +884,35 @@ export default function FNFFXComprehensiveDashboard() {
           recv_trade: trade, // 채권 거래손익
           recv_total: recvEval + trade,
           payable_eval: payableEval,
-          payable_trade: 0, // 채무 거래손익은 통화별 데이터 없음
-          payable_total: payableEval
+          payable_trade: payTrade, // 채무 거래손익
+          payable_total: payableEval + payTrade
         };
       });
     }
-  }, [dataSource, selectedCurrency, currencyRecvEvalPL, currencyPayableEvalPL, currencyTradePL]);
+  }, [dataSource, selectedCurrency, currencyRecvEvalPL, currencyPayableEvalPL, currencyTradePL, currencyPayTradePL]);
 
   // 통화별 종합 손익 데이터
   const currencyCombinedData = useMemo(() => {
     const currentRecvEval = currencyRecvEvalPL[currencyRecvEvalPL.length - 1] as unknown as Record<string, number>;
     const currentPayableEval = currencyPayableEvalPL[currencyPayableEvalPL.length - 1] as unknown as Record<string, number>;
     const currentTrade = currencyTradePL[currencyTradePL.length - 1] as unknown as Record<string, number>;
+    const currentPayTrade = currencyPayTradePL[currencyPayTradePL.length - 1] as unknown as Record<string, number>;
 
     return ['CNY', 'HKD', 'USD', 'EUR', 'TWD'].map(ccy => {
       const recvEval = currentRecvEval?.[ccy] || 0;
       const payableEval = currentPayableEval?.[ccy] || 0;
-      const trade = currentTrade?.[ccy] || 0;
+      const recvTrade = currentTrade?.[ccy] || 0;
+      const payTrade = currentPayTrade?.[ccy] || 0;
       return {
         currency: ccy,
         recv_eval: recvEval,
         payable_eval: payableEval,
-        trade: trade,
-        total: recvEval + payableEval + trade
+        trade: recvTrade,
+        payable_trade: payTrade,
+        total: recvEval + payableEval + recvTrade + payTrade
       };
     });
-  }, [currencyRecvEvalPL, currencyPayableEvalPL, currencyTradePL]);
+  }, [currencyRecvEvalPL, currencyPayableEvalPL, currencyTradePL, currencyPayTradePL]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-6">
@@ -1297,7 +1308,7 @@ export default function FNFFXComprehensiveDashboard() {
                         <div className="text-lg font-bold text-emerald-700">
                           {selectedCurrency === 'ALL'
                             ? `${currentQ.settlement_recv.toLocaleString()}억`
-                            : '-'
+                            : `${((currencyRecvSettlement[currencyRecvSettlement.length - 1] as unknown as Record<string, number>)?.[selectedCurrency] || 0).toLocaleString(undefined, {maximumFractionDigits: 1})}억`
                           }
                         </div>
                         {/* YoY 비교 */}
@@ -1512,7 +1523,7 @@ export default function FNFFXComprehensiveDashboard() {
                         <div className="text-lg font-bold text-orange-700">
                           {selectedCurrency === 'ALL'
                             ? `${Math.abs(currentQ.settlement_payable).toLocaleString()}억`
-                            : '-'
+                            : `${Math.abs((currencyPaySettlement[currencyPaySettlement.length - 1] as unknown as Record<string, number>)?.[selectedCurrency] || 0).toLocaleString(undefined, {maximumFractionDigits: 1})}억`
                           }
                         </div>
                         {/* YoY 비교 */}
@@ -1547,14 +1558,18 @@ export default function FNFFXComprehensiveDashboard() {
                       </div>
                       <div className="pt-2 border-t border-slate-200">
                         <div className="text-[10px] text-slate-500 mb-1">거래손익</div>
-                        <div className={`text-xl font-bold ${currentQ.trade_payable_pl >= 0 ? 'text-emerald-600' : 'text-red-500'}`}>
-                          {selectedCurrency === 'ALL' ? (
-                            <>{currentQ.trade_payable_pl >= 0 ? '+' : ''}{currentQ.trade_payable_pl.toFixed(1)}억</>
-                          ) : selectedCurrency === 'USD' ? (
-                            <>{currentQ.trade_payable_pl >= 0 ? '+' : ''}{currentQ.trade_payable_pl.toFixed(1)}억</>
-                          ) : (
-                            <>0.0억</>
-                          )}
+                        <div className={`text-xl font-bold ${(() => {
+                          const val = selectedCurrency === 'ALL'
+                            ? currentQ.trade_payable_pl
+                            : ((currencyPayTradePL[currencyPayTradePL.length - 1] as unknown as Record<string, number>)?.[selectedCurrency] || 0);
+                          return val >= 0 ? 'text-emerald-600' : 'text-red-500';
+                        })()}`}>
+                          {(() => {
+                            const val = selectedCurrency === 'ALL'
+                              ? currentQ.trade_payable_pl
+                              : ((currencyPayTradePL[currencyPayTradePL.length - 1] as unknown as Record<string, number>)?.[selectedCurrency] || 0);
+                            return <>{val >= 0 ? '+' : ''}{val.toFixed(1)}억</>;
+                          })()}
                         </div>
                         {/* YoY 비교 */}
                         {selectedCurrency === 'ALL' && (
@@ -1565,18 +1580,24 @@ export default function FNFFXComprehensiveDashboard() {
                             </span>
                           </div>
                         )}
-                        {/* 거래손익 통화별 구분 (ALL일 때만) - 채무 거래손익 (99%가 USD) */}
+                        {/* 거래손익 통화별 구분 (ALL일 때만) - 채무 거래손익 */}
                         {selectedCurrency === 'ALL' && (
                           <div className="mt-2 space-y-1">
-                            <div className="flex items-center justify-between text-[10px]">
-                              <div className="flex items-center gap-1">
-                                <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: currencyColors['USD'] }}></div>
-                                <span className="text-slate-500">USD</span>
-                              </div>
-                              <span className={currentQ.trade_payable_pl >= 0 ? 'text-emerald-600' : 'text-red-500'}>
-                                {currentQ.trade_payable_pl >= 0 ? '+' : ''}{currentQ.trade_payable_pl.toFixed(1)}
-                              </span>
-                            </div>
+                            {['USD', 'EUR', 'CNY'].map(ccy => {
+                              const val = (currencyPayTradePL[currencyPayTradePL.length - 1] as unknown as Record<string, number>)?.[ccy] || 0;
+                              if (val === 0) return null;
+                              return (
+                                <div key={ccy} className="flex items-center justify-between text-[10px]">
+                                  <div className="flex items-center gap-1">
+                                    <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: currencyColors[ccy] }}></div>
+                                    <span className="text-slate-500">{ccy}</span>
+                                  </div>
+                                  <span className={val >= 0 ? 'text-emerald-600' : 'text-red-500'}>
+                                    {val >= 0 ? '+' : ''}{val.toFixed(1)}
+                                  </span>
+                                </div>
+                              );
+                            })}
                           </div>
                         )}
                       </div>
@@ -1591,10 +1612,9 @@ export default function FNFFXComprehensiveDashboard() {
                     const payEvalPL = selectedCurrency === 'ALL'
                       ? currentQ.eval_payable_pl
                       : ((currencyPayableEvalPL[currencyPayableEvalPL.length - 1] as unknown as Record<string, number>)?.[selectedCurrency] || 0);
-                    // 채무 거래손익은 거의 전부 USD
-                    const payTradePL = selectedCurrency === 'ALL' || selectedCurrency === 'USD'
+                    const payTradePL = selectedCurrency === 'ALL'
                       ? currentQ.trade_payable_pl
-                      : 0;
+                      : ((currencyPayTradePL[currencyPayTradePL.length - 1] as unknown as Record<string, number>)?.[selectedCurrency] || 0);
                     const totalPL = payEvalPL + payTradePL;
                     return (
                       <span className={`text-xl font-bold ${totalPL >= 0 ? 'text-emerald-600' : 'text-red-700'}`}>

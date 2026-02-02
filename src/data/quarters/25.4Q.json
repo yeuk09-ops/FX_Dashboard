@@ -1,6 +1,6 @@
 {
   "baseQuarter": "25.4Q",
-  "lastUpdated": "2026-01-23",
+  "lastUpdated": "2026-02-02",
   "exchangeRateData": [
     {
       "quarter": "24.1Q",
@@ -81,9 +81,9 @@
       "year": 2024,
       "recv_balance": 527.5,
       "payable_balance": -373.4,
-      "eval_recv_pl": 13.38,
+      "eval_recv_pl": 13.39,
       "eval_payable_pl": -3.59,
-      "eval_net_pl": 9.79,
+      "eval_net_pl": 9.8,
       "trade_recv_pl": 24.7,
       "trade_payable_pl": -21.1,
       "trade_net_pl": 3.6,
@@ -96,60 +96,60 @@
       "year": 2024,
       "recv_balance": 479.3,
       "payable_balance": -401.3,
-      "eval_recv_pl": 10.49,
+      "eval_recv_pl": 10.48,
       "eval_payable_pl": -0.27,
-      "eval_net_pl": 10.22,
-      "trade_recv_pl": -7.4,
-      "trade_payable_pl": 12.5,
-      "trade_net_pl": 5.1,
+      "eval_net_pl": 10.21,
+      "trade_recv_pl": 17.3,
+      "trade_payable_pl": -8.6,
+      "trade_net_pl": 8.7,
       "settlement_recv": 778,
       "settlement_payable": -349,
-      "total_net_pl": 15.3
+      "total_net_pl": 18.9
     },
     {
       "quarter": "24.3Q",
       "year": 2024,
       "recv_balance": 1018.2,
       "payable_balance": -674.3,
-      "eval_recv_pl": -21.76,
+      "eval_recv_pl": -21.75,
       "eval_payable_pl": 11.08,
-      "eval_net_pl": -10.68,
-      "trade_recv_pl": -24.1,
-      "trade_payable_pl": 24.9,
-      "trade_net_pl": 0.8,
+      "eval_net_pl": -10.67,
+      "trade_recv_pl": -6.8,
+      "trade_payable_pl": 16.3,
+      "trade_net_pl": 9.5,
       "settlement_recv": 2395,
       "settlement_payable": -959,
-      "total_net_pl": -9.9
+      "total_net_pl": -1.2
     },
     {
       "quarter": "24.4Q",
       "year": 2024,
       "recv_balance": 491.6,
       "payable_balance": -637.1,
-      "eval_recv_pl": 46.21,
+      "eval_recv_pl": 46.19,
       "eval_payable_pl": -25.44,
-      "eval_net_pl": 20.77,
-      "trade_recv_pl": 48.5,
-      "trade_payable_pl": -37.0,
-      "trade_net_pl": 11.5,
+      "eval_net_pl": 20.75,
+      "trade_recv_pl": 41.7,
+      "trade_payable_pl": -20.7,
+      "trade_net_pl": 21.0,
       "settlement_recv": 1284,
       "settlement_payable": -706,
-      "total_net_pl": 32.3
+      "total_net_pl": 41.8
     },
     {
       "quarter": "25.1Q",
       "year": 2025,
       "recv_balance": 735.8,
       "payable_balance": -454.7,
-      "eval_recv_pl": -45.66,
-      "eval_payable_pl": 13.79,
-      "eval_net_pl": -31.87,
+      "eval_recv_pl": 2.67,
+      "eval_payable_pl": -4.43,
+      "eval_net_pl": -1.76,
       "trade_recv_pl": -17.8,
       "trade_payable_pl": -12.7,
       "trade_net_pl": -30.5,
       "settlement_recv": 2296,
       "settlement_payable": -1079,
-      "total_net_pl": -62.4
+      "total_net_pl": -32.3
     },
     {
       "quarter": "25.2Q",
@@ -159,12 +159,12 @@
       "eval_recv_pl": -34.94,
       "eval_payable_pl": 9.18,
       "eval_net_pl": -25.76,
-      "trade_recv_pl": 1.7,
-      "trade_payable_pl": 26.8,
-      "trade_net_pl": 28.5,
+      "trade_recv_pl": -17.0,
+      "trade_payable_pl": 14.1,
+      "trade_net_pl": -2.9,
       "settlement_recv": 1118,
       "settlement_payable": -586,
-      "total_net_pl": 2.7
+      "total_net_pl": -28.7
     },
     {
       "quarter": "25.3Q",
@@ -174,27 +174,27 @@
       "eval_recv_pl": 28.14,
       "eval_payable_pl": -10.47,
       "eval_net_pl": 17.67,
-      "trade_recv_pl": 58.1,
-      "trade_payable_pl": -23.7,
-      "trade_net_pl": 34.3,
+      "trade_recv_pl": 42.0,
+      "trade_payable_pl": -9.6,
+      "trade_net_pl": 32.4,
       "settlement_recv": 3012,
       "settlement_payable": -1266,
-      "total_net_pl": 52.0
+      "total_net_pl": 50.1
     },
     {
       "quarter": "25.4Q",
       "year": 2025,
-      "recv_balance": 1220.5,
+      "recv_balance": 1220.4,
       "payable_balance": -848.3,
-      "eval_recv_pl": -13.52,
+      "eval_recv_pl": -13.53,
       "eval_payable_pl": 20.42,
-      "eval_net_pl": 6.90,
-      "trade_recv_pl": 67.0,
-      "trade_payable_pl": -27.8,
-      "trade_net_pl": 39.2,
+      "eval_net_pl": 6.89,
+      "trade_recv_pl": 66.9,
+      "trade_payable_pl": -27.6,
+      "trade_net_pl": 39.3,
       "settlement_recv": 1997,
       "settlement_payable": -939,
-      "total_net_pl": 46.1
+      "total_net_pl": 46.2
     }
   ],
   "cumulativeData": [
@@ -1013,6 +1013,106 @@
       "CNY": 0
     }
   ],
+  "currencyPayTradePL_Quarterly": [
+    {
+      "quarter": "24.1Q",
+      "USD": -20.93,
+      "EUR": -0.16,
+      "CNY": 0.0
+    },
+    {
+      "quarter": "24.2Q",
+      "USD": -8.68,
+      "EUR": -0.04,
+      "CNY": 0.04
+    },
+    {
+      "quarter": "24.3Q",
+      "USD": 20.78,
+      "EUR": 0.0,
+      "CNY": -4.52
+    },
+    {
+      "quarter": "24.4Q",
+      "USD": -20.06,
+      "EUR": 0.01,
+      "CNY": -0.65
+    },
+    {
+      "quarter": "25.1Q",
+      "USD": -13.2,
+      "EUR": 0.51,
+      "CNY": 0.0
+    },
+    {
+      "quarter": "25.2Q",
+      "USD": 14.1,
+      "EUR": 0.0,
+      "CNY": 0.0
+    },
+    {
+      "quarter": "25.3Q",
+      "USD": -9.53,
+      "EUR": -0.01,
+      "CNY": 0.0
+    },
+    {
+      "quarter": "25.4Q",
+      "USD": -27.58,
+      "EUR": -0.04,
+      "CNY": 0.0
+    }
+  ],
+  "currencyPayTradePL_Cumulative": [
+    {
+      "quarter": "24.1Q",
+      "USD": -20.93,
+      "EUR": -0.17,
+      "CNY": 0.0
+    },
+    {
+      "quarter": "24.2Q",
+      "USD": -29.61,
+      "EUR": -0.21,
+      "CNY": 0.04
+    },
+    {
+      "quarter": "24.3Q",
+      "USD": -8.82,
+      "EUR": -0.2,
+      "CNY": -4.48
+    },
+    {
+      "quarter": "24.4Q",
+      "USD": -28.87,
+      "EUR": -0.19,
+      "CNY": -5.13
+    },
+    {
+      "quarter": "25.1Q",
+      "USD": -13.2,
+      "EUR": 0.51,
+      "CNY": 0.0
+    },
+    {
+      "quarter": "25.2Q",
+      "USD": 0.89,
+      "EUR": 0.5,
+      "CNY": 0.0
+    },
+    {
+      "quarter": "25.3Q",
+      "USD": -8.64,
+      "EUR": 0.49,
+      "CNY": 0.0
+    },
+    {
+      "quarter": "25.4Q",
+      "USD": -36.22,
+      "EUR": 0.45,
+      "CNY": 0.01
+    }
+  ],
   "volatilityData": {
     "USD": {
       "stdDev": 52.8,
@@ -1234,7 +1334,7 @@
     }
   ],
   "aiInsight": {
-    "lastUpdated": "2026-01-23",
+    "lastUpdated": "2026-02-02",
     "salesStructure": {
       "domesticRatio": 49.7,
       "domesticAmount": 8886,
